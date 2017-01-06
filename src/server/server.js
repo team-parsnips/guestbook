@@ -12,6 +12,9 @@ require('./config/middleware.js')(app, express);
 app.use('/', userRouter);
 app.use('/property', propertyRouter);
 
+// setup to serve static files
+app.use('/public', express.static(path.join(__dirname, '../client/public')));
+
 // general redirect for full client side rendering of pages
 app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
