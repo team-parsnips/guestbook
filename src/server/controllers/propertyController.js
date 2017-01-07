@@ -10,7 +10,6 @@ module.exports = {
 
   addProperty: function(req, res, next) {
     db.Property.create({
-      id: req.params.id,
       UserId: req.body.UserId,
       name: req.body.name,
       location: req.body.location,

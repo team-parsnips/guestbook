@@ -28,14 +28,13 @@ class AddPropForm extends React.Component {
   }
 
   addProp() {
-    var property, id, url;
+    var property, url;
     property = {
       name: this.refs.name.getValue(),
       address: this.refs.address.getValue()
     };
     let {dispatch} = this.props;
-    id = Math.floor(Math.random()*10000);
-    url = '/property/' + id;
+    url = '/property/';
     axios.post(url, {name: property.name,
       location: property.address,
       checkInTime: '3pm',
