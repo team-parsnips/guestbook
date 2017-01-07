@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
+import * as Utils from '../utils/utils';
 
 const explanationStyle = {
   position: 'absolute',
@@ -73,8 +74,8 @@ class SequenceSunBurst extends React.Component {
       createVisualization(json);
     });*/
 
-    createVisualization(window.flare);
-
+    createVisualization(Utils.bookingMap(window.exampleBookings));
+    
     // Main function to draw and set up the visualization, once we have the data.
     function createVisualization(json) {
 
