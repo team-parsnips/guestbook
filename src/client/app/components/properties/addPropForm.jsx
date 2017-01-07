@@ -8,7 +8,12 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
+const mapStateToProps = function(store) {
+  console.log(store);
+  return {
+    properties: store.propertyState
+  };
+}
 
 class AddPropForm extends React.Component {
   constructor(props) {
@@ -19,17 +24,32 @@ class AddPropForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({open: true});
+    this.setState({open: !this.state.open});
   }
 
   addProp() {
-    let property = {
+    var property, id, url;
+    property = {
       name: this.refs.name.getValue(),
       address: this.refs.address.getValue()
     };
-
     let {dispatch} = this.props;
-    dispatch(addProperty(property));
+    id = Math.floor(Math.random()*10000);
+    url = '/property/' + id;
+    axios.post(url, {name: property.name,
+      location: property.address,
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
+    })
+    .then(res => {
+      alert('success');
+      dispatch(addProperty(property));  
+    })
+    .catch(err => {
+      console.error('Error saving to DB', err);
+      alert('Add property was not successful, please try again');
+    });
+
   }
 
   render() {
@@ -59,4 +79,4 @@ class AddPropForm extends React.Component {
   }
 };
 
-export default connect()(AddPropForm);
+export default connect(mapStateToProps)(AddPropForm);

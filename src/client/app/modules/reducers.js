@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const userReducers = (state = {}, action) => {
+const userState = (state = {}, action) => {
   switch (action.type) {
     case 'USER_SIGNIN':
       return Object.assign({}, state, {
@@ -13,11 +13,11 @@ const userReducers = (state = {}, action) => {
   }
 };
 
-const propertyReducers = (state = [], action) => {
+const propertyState = (state = [], action) => {
   switch (action.type) {
     case 'ADD_PROPERTY':
       return [...state, {
-        index: action.property.index,
+        name: action.property.name,
         address: action.property.address
       }];
 
@@ -26,6 +26,6 @@ const propertyReducers = (state = [], action) => {
   }
 };
 
-const reducers = combineReducers({userReducers, propertyReducers});
+const reducers = combineReducers({userState, propertyState});
 
 export default reducers;
