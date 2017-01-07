@@ -1,8 +1,7 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('chat', 'root', '');
+var db = new Sequelize('guestbook', 'root', '');
 
 var User = db.define('User', {
-  username: Sequelize.STRING,
   email: Sequelize.STRING,
   password: Sequelize.STRING,
   firstName: Sequelize.STRING,
@@ -10,7 +9,6 @@ var User = db.define('User', {
 });
 
 var Property = db.define('Property', {
-  userId: { Sequelize.INTEGER, unique: true }
   name: Sequelize.STRING,
   location: Sequelize.STRING,
   checkInTime: Sequelize.STRING,

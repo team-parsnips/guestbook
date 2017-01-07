@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var app = express();
+var db = require('./db');
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -24,3 +25,4 @@ var port = (process.env.PORT || 4000);
 app.listen(port, function() {
   console.log('Guestbook is listening at', port);
 })
+
