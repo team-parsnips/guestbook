@@ -17,7 +17,7 @@ class PropertiesContainer extends React.Component {
   }
 
   handleAddProperty() {
-    this.setState({addProp: true});
+    this.setState({addProp: !this.state.addProp});
   }
 
   render() {
