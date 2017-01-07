@@ -1,0 +1,132 @@
+window.flare = {
+ "name": "analytics",
+ "children": [
+ {
+  "name": "Summer",
+  "children": [
+    {
+      "name": "June",
+      "children": [
+      {"name": "Week 1", "size": 4},
+      {"name": "Week 2", "size": 3},
+      {"name": "Week 3", "size": 2},
+      {"name": "Week 4", "size": 3},
+      ]
+    },
+    {
+      "name": "July",
+      "children": [
+      {"name": "Week 1", "size": 3},
+      {"name": "Week 2", "size": 4},
+      {"name": "Week 3", "size": 2},
+      {"name": "Week 4", "size": 3},
+      ]
+    },
+    {
+      "name": "August",
+      "children": [
+      {"name": "Week 1", "size": 2},
+      {"name": "Week 2", "size": 3},
+      {"name": "Week 3", "size": 4},
+      {"name": "Week 4", "size": 2},
+      ]
+    }
+  ]
+ },
+ {
+  "name": "Fall",
+  "children": [
+    {
+      "name": "September",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "October",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "November",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    }
+  ]
+ },
+ {
+  "name": "Winter",
+  "children": [
+    {
+      "name": "December",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "January",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "February",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1}
+      ]
+    }
+  ]
+ },
+ {
+  "name": "Spring",
+  "children": [
+    {
+      "name": "March",
+      "children": [
+      {"name": "Week 1", "size": 0},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "April",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    },
+    {
+      "name": "May",
+      "children": [
+      {"name": "Week 1", "size": 1},
+      {"name": "Week 2", "size": 1},
+      {"name": "Week 3", "size": 1},
+      {"name": "Week 4", "size": 1},
+      ]
+    }
+  ]
+ }
+ ]
+};

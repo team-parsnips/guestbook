@@ -13,7 +13,7 @@ app.use('/', userRouter);
 app.use('/property', propertyRouter);
 
 // setup to serve static files
-app.use('/public', express.static(path.join(__dirname, '../client/public')));
+app.use('/', express.static(path.join(__dirname, '../client')));
 
 // general redirect for full client side rendering of pages
 app.get('/*', function(req, res) {
