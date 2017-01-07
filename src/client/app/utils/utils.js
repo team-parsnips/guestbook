@@ -1,13 +1,25 @@
-// returns month from date object
-function getMonth(date) {
+import axios from 'axios';
+
+// returns month (0-11) from date string
+function getMonth(dateString) {
 /*  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   return months[date.getMonth()];*/
+  var date = new Date(dateString);
   return date.getMonth();
 }
 
-// returns week number (1-5) from date object
-function getWeek(date) {
+// returns week number (1-5) from date string
+function getWeek(dateString) {
+  var date = new Date(dateString);
   return Math.ceil(date.getDate() / 7) - 1;
+}
+
+// retrieves all bookings stored in db
+export const getBookings = (cb) => {
+  axios.get('/booking/' + 55)
+  .then(function(response) {
+    cb(bookingMap(response.data));
+  });
 }
 
 // populates hierarchical data structure based on bookings
