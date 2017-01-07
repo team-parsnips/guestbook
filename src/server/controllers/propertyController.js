@@ -10,7 +10,8 @@ module.exports = {
 
   addProperty: function(req, res, next) {
     db.Property.create({
-      UserId: req.params.UserId,
+      id: req.params.id,
+      UserId: req.body.UserId,
       name: req.body.name,
       location: req.body.location,
       checkInTime: req.body.checkInTime,
@@ -19,9 +20,9 @@ module.exports = {
       res.sendStatus(201);
     });
   },
-  
-  getAllProperty: function(req, res, next) {
-    db.Property.findAll()
+
+  getAllProperties: function(req, res, next) {
+    db.Property.findAll({include: [db.User]})
     .then(function(properties) {
       res.send(properties);
     });

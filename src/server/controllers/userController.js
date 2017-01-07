@@ -1,12 +1,14 @@
 var db = require('../db');
 
 module.exports = {
+
   login: function(req, res, next) {
     db.User.findOne({email: req.body.email})
       .then(function(user) {
-        res.send('Welcome, ' + user.firstName);
+        res.sendStatus(201);
       });
   },
+
   register: function(req, res, next) {
     db.User.create({
       email: req.body.email,
