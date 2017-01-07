@@ -5,13 +5,15 @@ var db = require('./db');
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
+var bookingRouter = require('./routers/bookingRouter.js');
 
 // configure middleware
 require('./config/middleware.js')(app, express);
 
-// setup routers for users and property
+// setup routers for users, property, and bookings
 app.use('/', userRouter);
 app.use('/property', propertyRouter);
+app.use('/booking', bookingRouter);
 
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
