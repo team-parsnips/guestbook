@@ -16,8 +16,8 @@ var Property = db.define('Property', {
 });
 
 var Booking = db.define('Booking', {
-  checkInDay: Sequelize.STRING,
-  checkOutDay: Sequelize.STRING,
+  checkInDay: Sequelize.DATE,
+  checkOutDay: Sequelize.DATE,
   days: Sequelize.INTEGER,
   pricePaid: Sequelize.FLOAT,
   rating: Sequelize.INTEGER
