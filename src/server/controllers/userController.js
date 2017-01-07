@@ -1,8 +1,22 @@
+var db = require('../db');
+
 module.exports = {
+
   login: function(req, res, next) {
-    res.send({message:'logging in'});
+    db.User.findOne({email: req.body.email})
+      .then(function(user) {
+        res.sendStatus(201);
+      });
   },
+
   register: function(req, res, next) {
-    res.send({message: 'registering'});
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    }).then(function(user) {
+      res.sendStatus(201);
+    });
   }
 }
