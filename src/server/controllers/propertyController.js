@@ -22,8 +22,7 @@ module.exports = {
 
   getAllProperties: function(req, res, next) {
     // db.Property.findAll({include: [db.User]})
-    console.log(req);
-    db.Property.findAll({limit: 50})
+    db.Property.findAll()
     .then(function(properties) {
       console.log(properties);
       res.send(properties);

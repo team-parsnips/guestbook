@@ -18,14 +18,14 @@ const propertyState = (state = [], action) => {
     case 'ADD_PROPERTY':
       return [...state, {
         name: action.property.name,
-        address: action.property.address
+        location: action.property.location
       }];
 
     case 'POPULATE_PROPERTIES':   
       return action.properties.map(property => {
         return {
         name: property.name,
-        address: property.address  
+        location: property.location  
         };
       });
     default:
