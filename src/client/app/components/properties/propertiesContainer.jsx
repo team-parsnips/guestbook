@@ -29,10 +29,10 @@ class PropertiesContainer extends React.Component {
       addProp: false
     };
 
-    this.handleAddProperty = this.handleAddProperty.bind(this);
+    this.openHandler = this.openHandler.bind(this);
   }
 
-  handleAddProperty() {
+  openHandler() {
     this.setState({addProp: !this.state.addProp});
   }
 
@@ -40,7 +40,6 @@ class PropertiesContainer extends React.Component {
     let {dispatch} = this.props;
     axios.get('/property/all')
     .then(response => {
-      console.log(response);
       if (response.data.length) {
         dispatch(populateProperties(response.data));
       }
@@ -56,12 +55,12 @@ class PropertiesContainer extends React.Component {
       <div>
         <PropertyList />
         <Card
-        onTouchTap={()=> {this.handleAddProperty()}}
+        onTouchTap={()=> {this.openHandler()}}
         style={cardStyle}
         >
         <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
         </Card>
-        <AddPropForm open={this.state.addProp} />
+        <AddPropForm openHandler={this.openHandler} open={this.state.addProp}/>
       </div>
     );
   }

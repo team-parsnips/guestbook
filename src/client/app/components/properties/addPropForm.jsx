@@ -18,27 +18,21 @@ const mapStateToProps = function(store) {
 class AddPropForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({open: !this.state.open});
+    this.state = {}
   }
 
   addProp() {
     var property, url;
     property = {
       name: this.refs.name.getValue(),
-      address: this.refs.address.getValue(),
+      location: this.refs.location.getValue(),
       checkInTime: '3pm',
       checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
     url = '/property/';
     axios.post(url, {name: property.name,
-      location: property.address,
+      location: property.location,
       checkInTime: '3pm',
       checkOutTime: '11am'      
     })
@@ -49,6 +43,7 @@ class AddPropForm extends React.Component {
       console.error('Error saving to DB', err);
       alert('Add property was not successful, please try again');
     });
+    this.props.openHandler();
 
   }
 
@@ -58,15 +53,15 @@ class AddPropForm extends React.Component {
         <Dialog
         title='Add your property'
         modal={false}
-        open={this.state.open}
-        onRequestClose={()=>{this.setState({open: !this.state.open})}}>
+        open={this.props.open}
+        onRequestClose={()=>{this.props.openHandler()}}>
           <TextField
           ref='name'
           hintText='Property Name'
           /><br />
           <TextField
-          ref='address'
-          hintText='Address'
+          ref='location'
+          hintText='Location'
           /><br />
           <RaisedButton
           label='Add'
