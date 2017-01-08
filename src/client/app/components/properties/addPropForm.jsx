@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import axios from 'axios';
 
 import {addProperty} from '../../modules/actions';
 
@@ -8,23 +8,48 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
+const mapStateToProps = function(store) {
+  console.log(store);
+  return {
+    properties: store.propertyState
+  };
+}
 
 class AddPropForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: this.props.open
+      open: false
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({open: !this.state.open});
+  }
+
   addProp() {
-    let property = {
+    var property, url;
+    property = {
       name: this.refs.name.getValue(),
-      address: this.refs.address.getValue()
+      address: this.refs.address.getValue(),
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
-    dispatch(addProperty(property));
+    url = '/property/';
+    axios.post(url, {name: property.name,
+      location: property.address,
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
+    })
+    .then(res => {
+      dispatch(addProperty(property));  
+    })
+    .catch(err => {
+      console.error('Error saving to DB', err);
+      alert('Add property was not successful, please try again');
+    });
+
   }
 
   render() {
@@ -34,15 +59,15 @@ class AddPropForm extends React.Component {
         title='Add your property'
         modal={false}
         open={this.state.open}
-        onRequestClose={()=>{this.setState({open: true})}}>
+        onRequestClose={()=>{this.setState({open: !this.state.open})}}>
           <TextField
           ref='name'
           hintText='Property Name'
-          />
+          /><br />
           <TextField
           ref='address'
           hintText='Address'
-          />
+          /><br />
           <RaisedButton
           label='Add'
           primary={true}
@@ -54,4 +79,4 @@ class AddPropForm extends React.Component {
   }
 };
 
-export default connect()(AddPropForm);
+export default connect(mapStateToProps)(AddPropForm);
