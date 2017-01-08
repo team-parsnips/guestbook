@@ -31,7 +31,9 @@ class AddPropForm extends React.Component {
     var property, url;
     property = {
       name: this.refs.name.getValue(),
-      address: this.refs.address.getValue()
+      address: this.refs.address.getValue(),
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
     url = '/property/';
@@ -41,7 +43,6 @@ class AddPropForm extends React.Component {
       checkOutTime: '11am'      
     })
     .then(res => {
-      alert('success');
       dispatch(addProperty(property));  
     })
     .catch(err => {
@@ -66,7 +67,7 @@ class AddPropForm extends React.Component {
           <TextField
           ref='address'
           hintText='Address'
-          />
+          /><br />
           <RaisedButton
           label='Add'
           primary={true}

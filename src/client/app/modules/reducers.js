@@ -21,6 +21,13 @@ const propertyState = (state = [], action) => {
         address: action.property.address
       }];
 
+    case 'POPULATE_PROPERTIES':   
+      return action.properties.map(property => {
+        return {
+        name: property.name,
+        address: property.address  
+        };
+      });
     default:
       return state;
   }
