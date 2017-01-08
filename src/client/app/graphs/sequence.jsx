@@ -74,8 +74,7 @@ class SequenceSunBurst extends React.Component {
       createVisualization(json);
     });*/
     
-    Utils.getBookings(createVisualization);
-    //createVisualization(data);
+    Utils.getBookings(Utils.bookingMap, createVisualization);
     
     // Main function to draw and set up the visualization, once we have the data.
     function createVisualization(json) {
