@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import axios from 'axios';
 
 import {addProperty} from '../../modules/actions';
 
@@ -8,23 +8,43 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
+const mapStateToProps = function(store) {
+  console.log(store);
+  return {
+    properties: store.propertyState
+  };
+}
 
 class AddPropForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: this.props.open
-    }
+    this.state = {}
   }
 
   addProp() {
-    let property = {
+    var property, url;
+    property = {
       name: this.refs.name.getValue(),
-      address: this.refs.address.getValue()
+      location: this.refs.location.getValue(),
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
-    dispatch(addProperty(property));
+    url = '/property/';
+    axios.post(url, {name: property.name,
+      location: property.location,
+      checkInTime: '3pm',
+      checkOutTime: '11am'      
+    })
+    .then(res => {
+      dispatch(addProperty(property));  
+    })
+    .catch(err => {
+      console.error('Error saving to DB', err);
+      alert('Add property was not successful, please try again');
+    });
+    this.props.openHandler();
+
   }
 
   render() {
@@ -33,16 +53,18 @@ class AddPropForm extends React.Component {
         <Dialog
         title='Add your property'
         modal={false}
-        open={this.state.open}
-        onRequestClose={()=>{this.setState({open: true})}}>
+        open={this.props.open}
+        onRequestClose={()=>{this.props.openHandler()}}>
           <TextField
           ref='name'
           hintText='Property Name'
-          />
+          fullWidth={true}
+          /><br />
           <TextField
-          ref='address'
-          hintText='Address'
-          />
+          ref='location'
+          hintText='Location'
+          fullWidth={true}
+          /><br />
           <RaisedButton
           label='Add'
           primary={true}
@@ -54,4 +76,4 @@ class AddPropForm extends React.Component {
   }
 };
 
-export default connect()(AddPropForm);
+export default connect(mapStateToProps)(AddPropForm);

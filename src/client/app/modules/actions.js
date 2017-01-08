@@ -12,3 +12,10 @@ export const addProperty = (property) => {
     property
   }
 }
+
+export const populateProperties = (properties) => {
+  return {
+    type: 'POPULATE_PROPERTIES',
+    properties
+  }
+}
