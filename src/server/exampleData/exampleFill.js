@@ -3,8 +3,10 @@ var Promise = require("bluebird");
 var exampleUsers = require('./exampleUsers.js');
 var exampleProperties = require('./exampleProperty.js');
 var exampleBookings = require('./exampleBookings.js');
+var exampleBookings2 = require('./exampleBookings2.js');
 
 // begins chained functions to add users, properties, and bookings
+var propertyId = 0;
 addUsers();
 
 // add all users
@@ -52,9 +54,32 @@ function addProperties() {
 function addBookings() {
   db.Property.findOne()
   .then(function(property) {
-    var propertyId = property.id;
+    propertyId = property.id;
     // add all bookings
-    exampleBookings.reduce(function(promise, booking) {
+    return exampleBookings.reduce(function(promise, booking) {
+      return promise.then(function() {
+        return db.Booking.create({
+        checkInDay: booking.checkInDay,
+        checkOutDay: booking.checkOutDay,
+        days: booking.days,
+        pricePaid: booking.pricePaid,
+        rating: booking.rating,
+        PropertyId: propertyId
+        });
+      });
+    }, Promise.resolve())
+  }).then(function() {
+    addBookings2();
+  })
+}
+
+// find 2nd property to attach bookings to
+function addBookings2() {
+  db.Property.findOne({where: {id: {$ne: propertyId}}})
+  .then(function(property) {
+    propertyId = property.id;
+    // add all bookings
+    return exampleBookings2.reduce(function(promise, booking) {
       return promise.then(function() {
         return db.Booking.create({
         checkInDay: booking.checkInDay,
@@ -68,4 +93,3 @@ function addBookings() {
     }, Promise.resolve())
   });
 }
-
