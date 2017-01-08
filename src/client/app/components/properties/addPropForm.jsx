@@ -58,10 +58,12 @@ class AddPropForm extends React.Component {
           <TextField
           ref='name'
           hintText='Property Name'
+          fullWidth={true}
           /><br />
           <TextField
           ref='location'
           hintText='Location'
+          fullWidth={true}
           /><br />
           <RaisedButton
           label='Add'
