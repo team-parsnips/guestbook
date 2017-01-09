@@ -15,10 +15,10 @@ function getWeek(dateString) {
 }
 
 // retrieves all bookings stored in db
-export const getBookings = (cb) => {
-  axios.get('/booking/' + 55)
+export const getBookings = (cb1, cb2) => {
+  axios.get('/booking/' + 114)
   .then(function(response) {
-    cb(bookingMap(response.data));
+    cb2(cb1(response.data));
   });
 }
 
@@ -46,4 +46,25 @@ export const bookingMap = (bookings) => {
     }
   });
   return flare;
+}
+
+// populates pie chart data structure based on bookings
+export const bookingPie = (bookings) => {
+  var mappedBookings = {};
+  bookings.map((booking) => {
+    if (mappedBookings[booking.days]) {
+      mappedBookings[booking.days]++;
+    } else {
+      mappedBookings[booking.days] = 1;
+    }
+  });
+  var result = [];
+  for (var mappedBooking in mappedBookings) {
+    var dataPoint = {
+      durationOfStay: mappedBooking,
+      freq: mappedBookings[mappedBooking]
+    };
+    result.push(dataPoint);
+  }
+  return result;
 }
