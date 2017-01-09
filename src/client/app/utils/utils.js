@@ -15,7 +15,6 @@ function getWeek(dateString) {
 }
 
 // retrieves all bookings stored in db
-
 export const getBookings = (cb1, cb2) => {
   //TODO: change bookingID after running examlpleFill.js
   axios.get('/booking/' + 114)
@@ -65,6 +64,7 @@ export const bookingMap = (bookings) => {
   return flare;
 }
 
+
 // populates pie chart data structure based on bookings
 export const bookingPie = (bookings) => {
   var mappedBookings = {};
@@ -101,4 +101,13 @@ export const stackedRevenueBar = (bookings) => {
   });
 
   return dataSet;
+}
+
+// populates data for scatter plot
+export const bookingTimeMap = (bookings) => {
+  var bookingArr = [];
+  bookings.map((booking) => {
+    bookingArr.push(booking); 
+  });
+  return bookingArr;
 }
