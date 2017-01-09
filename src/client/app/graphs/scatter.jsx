@@ -16,7 +16,7 @@ class ScatterPlot extends React.Component {
   }
 
   componentDidMount() {
-    var margin = {top: 20, right: 20, bottom: 30, left: 40};
+    var margin = {top: 20, right: 20, bottom: 70, left: 50};
     var width = this.state.width;
     var height = this.state.height;
 
@@ -30,59 +30,71 @@ class ScatterPlot extends React.Component {
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+    // format time
+    var formatTime = d3.timeFormat("%I:%M %p");
+
+    var parseTime = d3.timeParse("%d-%b-%y");
+
     Utils.getBookings(makeScatter, Utils.bookingTimeMap);
 
-    var parseDate = d3.timeParse("%h:%m %p").parse;
+    // set the ranges
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleTime().range([height, 0]);
+
+    // define the line
+    var valueline = d3.line()
+      .x(function(d) { return x(d.date); })
+      .y(function(d) { return y(d.close); });
 
     function makeScatter(data) {
 
-      console.log(data);
+      x.domain(d3.extent(data, function(d) { return d.checkInTime; }));
+      y.domain(d3.extent(data, function(d) { return d.checkOutTime; }));
 
-      var x = d3.scaleLinear()
-          .domain(d3.extent(data, function(d) { return d.checkIn; }))
-          .range([0, width]);
-
-      var y = d3.scaleLinear()
-          .domain(d3.extent(data, function(d) { return d.checkOut; }))
-          .range([height, 0]);
-
-      g.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x-axis")
-        .call(d3.axisBottom(x)
-            .ticks(13, "s"));
-
-      g.append("text")             
-        .attr("transform",
-              "translate(" + (width/2) + " ," + 
-                             (height + margin.top + 7) + ")")
-        .style("text-anchor", "right")
-        .style('font', '10px sans-serif')
-        .text("Check In Time");
-
-      g.append("g")
-        .attr("transform", "translate(" + x + ",0)")
-        .attr("class", "y-axis")
-        .call(d3.axisLeft(y)
-            .ticks(9, 's'));
-
-      g.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x",0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .style('font', '10px sans-serif')
-        .text("Check Out Time");     
-
+      // add scattered points
       g.selectAll(".dot")
           .data(data)
           .enter().append("circle")
           .attr("class", "dot")
           .attr("r", 3.5)
-          .attr("cx", function(d) { return x(d.checkIn); })
-          .attr("cy", function(d) { return y(d.checkOut); });
-          // .style("fill", function(d) { return color(d.species); });
+          .attr("cx", function(d) { return x(d.checkInTime); })
+          .attr("cy", function(d) { return y(d.checkOutTime); });
+
+      // add and format x-axis
+      g.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).ticks(d3.timeMinute, 15).tickFormat(d3.timeFormat("%I:%M %p")))
+        .selectAll("text")  
+        .style("text-anchor", "middle")
+        .attr("dx", "-.8em")
+        .attr("dy", ".75em")
+        // .attr("transform", "rotate(-30)");
+
+      g.append("text")             
+        .attr("transform",
+              "translate(" + (width/2) + " ," + 
+                             (height + margin.top + 25) + ")")
+        .style("text-anchor", "right")
+        .style('font', '10px sans-serif')
+        .text("Check In Time");
+
+      // add and format y-axis
+      g.append("g")
+        .attr("class", "y-axis")
+        .attr("transform", "translate(" + x + ",0)")
+        .call(d3.axisLeft(y));
+        // .call(d3.axisLeft(y).ticks(d3.timeMinute, 15).tickFormat(d3.timeFormat("%I:%M %p")))
+
+      g.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1.5em")
+        .style("text-anchor", "middle")
+        .style('font', '10px sans-serif')
+        .text("Check Out Time");     
+
     }
     // });
   }

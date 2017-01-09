@@ -107,7 +107,10 @@ export const stackedRevenueBar = (bookings) => {
 export const bookingTimeMap = (bookings) => {
   var bookingArr = [];
   bookings.map((booking) => {
-    bookingArr.push(booking); 
+    var bookingDetails = {};
+    bookingDetails.checkInTime = new Date(booking.checkInTime);
+    bookingDetails.checkOutTime = new Date(booking.checkOutTime);
+    bookingArr.push(bookingDetails); 
   });
   return bookingArr;
 }
