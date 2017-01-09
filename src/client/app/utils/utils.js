@@ -15,7 +15,9 @@ function getWeek(dateString) {
 }
 
 // retrieves all bookings stored in db
+
 export const getBookings = (cb1, cb2) => {
+  //TODO: change bookingID after running examlpleFill.js
   axios.get('/booking/' + 114)
   .then(function(response) {
     cb2(cb1(response.data));

@@ -18,6 +18,8 @@ var Property = db.define('Property', {
 var Booking = db.define('Booking', {
   checkInDay: Sequelize.DATE,
   checkOutDay: Sequelize.DATE,
+  checkInTime: Sequelize.DATE, 
+  checkOutTime: Sequelize.DATE,
   days: Sequelize.INTEGER,
   pricePaid: Sequelize.FLOAT,
   rating: Sequelize.INTEGER
