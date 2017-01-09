@@ -15,10 +15,25 @@ function getWeek(dateString) {
 }
 
 // retrieves all bookings stored in db
-export const getBookings = (cb) => {
-  axios.get('/booking/' + 55)
+export const getBookings = (cb1, cb2) => {
+  axios.get('/booking/' + 114)
   .then(function(response) {
-    cb(bookingMap(response.data));
+    cb2(cb1(response.data));
+  });
+}
+
+// retrieves bookings for stacked grouped bar - Emerson's DB
+export const getBookings1 = (cb1, cb2) => {
+  axios.get('/booking/' + 1)
+  .then(function(response) {
+    cb2(cb1(response.data));
+  });
+}
+
+export const getBookings2 = (cb1, cb2) => {
+  axios.get('/booking/' + 2)
+  .then(function(response) {
+    cb2(cb1(response.data));
   });
 }
 
@@ -46,4 +61,42 @@ export const bookingMap = (bookings) => {
     }
   });
   return flare;
+}
+
+// populates pie chart data structure based on bookings
+export const bookingPie = (bookings) => {
+  var mappedBookings = {};
+  bookings.map((booking) => {
+    if (mappedBookings[booking.days]) {
+      mappedBookings[booking.days]++;
+    } else {
+      mappedBookings[booking.days] = 1;
+    }
+  });
+  var result = [];
+  for (var mappedBooking in mappedBookings) {
+    var dataPoint = {
+      durationOfStay: mappedBooking,
+      freq: mappedBookings[mappedBooking]
+    };
+    result.push(dataPoint);
+  }
+  return result;
+}
+
+export const stackedRevenueBar = (bookings) => {
+  var dataSet = {
+    'x-ticks': 12,
+    'x-axis': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+    'data': {}
+  };
+  bookings.forEach(booking => {
+    let month = getMonth(booking.checkOutDay);
+    if (dataSet.data['Property' + booking.PropertyId] === undefined) {
+      dataSet.data['Property' + booking.PropertyId] = new Array(12).fill(0);
+    }
+    dataSet.data['Property' + booking.PropertyId][month] += booking.pricePaid;
+  });
+
+  return dataSet;
 }
