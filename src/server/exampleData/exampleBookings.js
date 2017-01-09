@@ -1,4 +1,4 @@
-module.exports = [
+/*module.exports = [
 {"checkInTime": new Date(Date.UTC(2016, 5, 14, 15, 47, 23)),"checkInDay": new Date(2016, 5, 14),"checkOutTime": new Date(Date.UTC(2016, 5, 18, 10, 45, 23)),"checkOutDay": new Date(2016, 5, 18) ,"days": 4,"pricePaid": 976.16,"rating": 4},
 {"checkInTime": new Date(Date.UTC(2016, 5, 14, 15, 53, 21)),"checkInDay": new Date(2016, 5, 14),"checkOutTime": new Date(Date.UTC(2016, 5, 16, 10, 32, 1)),"checkOutDay": new Date(2016, 5, 16) ,"days": 2,"pricePaid": 421.23,"rating": 4},
 {"checkInTime": new Date(Date.UTC(2016, 6, 14, 15, 22, 56)),"checkInDay": new Date(2016, 6, 14),"checkOutTime": new Date(Date.UTC(2016, 6, 16, 9, 57, 12)),"checkOutDay": new Date(2016, 6, 16) ,"days": 2,"pricePaid": 604.12,"rating": 4},
@@ -19,7 +19,7 @@ module.exports = [
 {"checkInTime": new Date(Date.UTC(2016, 1, 14, 16, 25, 45)),"checkInDay": new Date(2016, 1, 14),"checkOutTime": new Date(Date.UTC(2016, 1, 16, 9, 57, 18)),"checkOutDay": new Date(2016, 1, 16) ,"days": 2,"pricePaid": 636.79,"rating": 5},
 {"checkInTime": new Date(Date.UTC(2016, 3, 14, 17, 25, 4)),"checkInDay": new Date(2016, 3, 14),"checkOutTime": new Date(Date.UTC(2016, 3, 16, 10, 59, 12)),"checkOutDay": new Date(2016, 3, 16) ,"days": 2,"pricePaid": 513.73,"rating": 4},
 {"checkInTime": new Date(Date.UTC(2016, 2, 14, 15, 2, 6)),"checkInDay": new Date(2016, 2, 14),"checkOutTime": new Date(Date.UTC(2016, 2, 16, 11, 4, 58)),"checkOutDay": new Date(2016, 2, 16) ,"days": 2,"pricePaid": 547.18,"rating": 5}
-];
+];*/
 
 
 module.exports = [
