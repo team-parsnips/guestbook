@@ -74,7 +74,12 @@ class SequenceSunBurst extends React.Component {
       createVisualization(json);
     });*/
     
+<<<<<<< HEAD
     Utils.getBookings(Utils.bookingMap, createVisualization);
+=======
+    Utils.getBookings(createVisualization, Utils.bookingMap);
+    //createVisualization(data);
+>>>>>>> Change time format for check-in and check-out time
     
     // Main function to draw and set up the visualization, once we have the data.
     function createVisualization(json) {
