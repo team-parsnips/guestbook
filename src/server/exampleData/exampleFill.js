@@ -86,6 +86,8 @@ function addBookings2() {
         return db.Booking.create({
         checkInDay: booking.checkInDay,
         checkOutDay: booking.checkOutDay,
+        checkInTime: booking.checkInTime, 
+        checkOutTime: booking.checkOutTime,
         days: booking.days,
         pricePaid: booking.pricePaid,
         rating: booking.rating,

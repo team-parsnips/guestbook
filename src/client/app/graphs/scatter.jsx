@@ -35,7 +35,7 @@ class ScatterPlot extends React.Component {
 
     var parseTime = d3.timeParse("%d-%b-%y");
 
-    Utils.getBookings(makeScatter, Utils.bookingTimeMap);
+    Utils.getBookings(Utils.bookingTimeMap, makeScatter);
 
     // set the ranges
     var x = d3.scaleTime().range([0, width]);
