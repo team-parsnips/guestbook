@@ -1,7 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import {connect} from 'react-redux';
 
-import {signIn} from '../modules/actions';
+import {signIn, populateProperties} from '../modules/actions';
 
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -27,7 +28,20 @@ class LoginContainer extends React.Component {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
     }
+
+    axios.get('/property/all')
+    .then(response => {
+      if (response.data.length) {
+        dispatch(populateProperties(response.data));
+      }
+    })
+    .catch(err => {
+      console.error('Error fetching properties', err);
+    });
+
     dispatch(signIn(user));
+
+
   }
 
   render() {

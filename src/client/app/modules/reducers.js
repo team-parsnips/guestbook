@@ -22,12 +22,14 @@ const propertyState = (state = [], action) => {
       }];
 
     case 'POPULATE_PROPERTIES':   
-      return action.properties.map(property => {
-        return {
-        name: property.name,
-        location: property.location  
-        };
-      });
+      return action.properties;
+
+      // .map(property => {
+      //   return {
+      //   name: property.name,
+      //   location: property.location  
+      //   };
+      // });
     default:
       return state;
   }
