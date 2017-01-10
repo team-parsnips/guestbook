@@ -24,8 +24,19 @@ module.exports = {
     // db.Property.findAll({include: [db.User]})
     db.Property.findAll()
     .then(function(properties) {
-      console.log(properties);
       res.send(properties);
+    });
+  },
+
+  loadAllProperties: function(req, res, next) {
+    db.Property.findAll()
+    .then(function(properties) {
+      res.compoundData = {properties: properties} || {};
+      console.log(res.compoundData);
+      next();
+    })
+    .catch(function(err) {
+      console.error('Error loading all properties', err);
     });
   }
 }

@@ -13,5 +13,16 @@ module.exports = {
   },
   deleteBooking: function(req, res, next) {
 
+  },
+
+  loadAllBookings: function(req, res, next) {
+    db.Booking.findAll()
+    .then(function(bookings) {
+      res.compoundData['bookings'] = bookings;
+      next();
+    })
+    .catch(function(err) {
+      console.error('Error loading all bookings', err);
+    });
   }
 }
