@@ -37,16 +37,7 @@ class PropertiesContainer extends React.Component {
   }
 
   componentDidMount() {
-    let {dispatch} = this.props;
-    axios.get('/property/all')
-    .then(response => {
-      if (response.data.length) {
-        dispatch(populateProperties(response.data));
-      }
-    })
-    .catch(err => {
-      console.error('Error fetching properties', err);
-    });
+
   }
 
   render() {
