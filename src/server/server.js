@@ -14,6 +14,8 @@ require('./config/middleware.js')(app, express);
 app.use('/', userRouter);
 app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
+app.get('/allData', ()=>console.log('heyyy'));
+
 
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
