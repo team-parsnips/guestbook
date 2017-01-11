@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 
-import {signIn, populateProperties} from '../modules/actions';
+import {signIn, populateProperties, populateBookings} from '../modules/actions';
 
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -29,18 +29,18 @@ class LoginContainer extends React.Component {
       password: this.refs.password.getValue()
     }
 
-    axios.get('/property/all')
-    .then(response => {
-      if (response.data.length) {
-        dispatch(populateProperties(response.data));
-      }
-    })
-    .catch(err => {
-      console.error('Error fetching properties', err);
-    });
-
+    // store user object within redux
     dispatch(signIn(user));
 
+    // hydrates redux store with all of user's properties and bookings
+    axios.get('/allData')
+    .then(response => {
+      dispatch(populateProperties(response.data.properties));
+      dispatch(populateBookings(response.data.bookings));
+    })
+    .catch(err => {
+      console.error('Error fetching properties and bookings', err);
+    });
 
   }
 

@@ -4,12 +4,10 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 
 const PropertyCard = (props) => {
   return (
-    <div>
-      <Card>
-        <CardTitle title={props.property.name} subtitle={props.property.address}>
-        </CardTitle>
-      </Card>
-    </div>
+    <Card>
+      <CardTitle title={props.property.name} subtitle={props.property.address}>
+      </CardTitle>
+    </Card>
   );
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 import {connect} from 'react-redux';
-// import {populateProperties} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
@@ -20,10 +19,22 @@ const cardStyle = {
   display: 'inline-block'
 }
 
+const mapStateToProps = function(store) {
+  return {
+    properties: store.propertyState,
+    bookings: store.bookingState
+  }
+}
+
 class Analytics extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    console.log('analytics', this.props.properties);
+    console.log('bookings', this.props.bookings);
   }
 
   render() {
@@ -62,4 +73,4 @@ class Analytics extends React.Component {
   }
 };
 
-export default connect()(Analytics);
+export default connect(mapStateToProps)(Analytics);

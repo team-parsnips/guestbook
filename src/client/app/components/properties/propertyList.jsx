@@ -1,27 +1,38 @@
 import React from 'react';
+import SwipeableViews from 'react-swipeable-views';
 
 import {connect} from 'react-redux';
 import PropertyCard from './propertyCard.jsx';
 
-const mapStateToProps = function(store) {
-  console.log(store);
-  return {
-    properties: store.propertyState
-  };
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+const deleteStyle = {
+  backgroundColor: 'red'
 }
 
-const PropertyList = (props) => {
-  console.log('props', props);
-  
-  return (
-    <div className='propertyList'>
-    {
-      props.properties.map((property, i) => (
-        <PropertyCard property={property} key={i} />
-      ))
-    }
-    </div>);
+class PropertyList extends React.Component {
+
+  render() {
+    var context = this;
+    return (
+      <div className='propertyList'>
+      {
+        this.props.properties.map((property, i) => (
+          <SwipeableViews index={0} onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={property.id}>
+            <div>
+              <PropertyCard property={property} />
+            </div>
+            <div>
+              <Card style={deleteStyle}>
+                <CardTitle title='DELETE DELETE DELETE' />
+              </Card>
+            </div>
+          </SwipeableViews>
+        ))
+      }
+      </div>);
+  }
 }
 
-export default connect(mapStateToProps)(PropertyList);
+export default PropertyList;
 
