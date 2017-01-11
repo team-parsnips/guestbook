@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 import {connect} from 'react-redux';
-// import {populateProperties} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
