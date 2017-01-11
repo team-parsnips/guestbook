@@ -22,6 +22,13 @@ const buttonStyle = {
   margin: '0 auto'
 }
 
+const mapStateToProps = function(store) {
+  console.log(store);
+  return {
+    properties: store.propertyState
+  };
+}
+
 class PropertiesContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -40,11 +47,15 @@ class PropertiesContainer extends React.Component {
 
   }
 
+  deleteProperty(property) {
+    console.log('DELETE DELETE DELETE', property);
+  }
+
   render() {
 
     return (
       <div>
-        <PropertyList />
+        <PropertyList properties={this.props.properties}deleteProperty={(property) => this.deleteProperty(property)}/>
         <Card
         onTouchTap={()=> {this.openHandler()}}
         style={cardStyle}
@@ -57,5 +68,5 @@ class PropertiesContainer extends React.Component {
   }
 };
 
-export default connect()(PropertiesContainer);
+export default connect(mapStateToProps)(PropertiesContainer);
           // <CardMedia><AddIcon /></CardMedia>
