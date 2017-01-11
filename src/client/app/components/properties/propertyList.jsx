@@ -18,7 +18,7 @@ class PropertyList extends React.Component {
       <div className='propertyList'>
       {
         this.props.properties.map((property, i) => (
-          <SwipeableViews onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={i}>
+          <SwipeableViews index={0} onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={property.id}>
             <div>
               <PropertyCard property={property} />
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import {connect} from 'react-redux';
-import {populateProperties} from '../../modules/actions';
+import {deleteProperty} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
@@ -23,7 +23,6 @@ const buttonStyle = {
 }
 
 const mapStateToProps = function(store) {
-  console.log(store);
   return {
     properties: store.propertyState
   };
@@ -48,14 +47,14 @@ class PropertiesContainer extends React.Component {
   }
 
   deleteProperty(property) {
-    console.log('DELETE DELETE DELETE', property);
+    this.props.dispatch(deleteProperty(property));
   }
 
   render() {
-
     return (
       <div>
-        <PropertyList properties={this.props.properties}deleteProperty={(property) => this.deleteProperty(property)}/>
+        <PropertyList 
+          properties={this.props.properties}deleteProperty={(property) => this.deleteProperty(property)}/>
         <Card
         onTouchTap={()=> {this.openHandler()}}
         style={cardStyle}
@@ -69,4 +68,3 @@ class PropertiesContainer extends React.Component {
 };
 
 export default connect(mapStateToProps)(PropertiesContainer);
-          // <CardMedia><AddIcon /></CardMedia>

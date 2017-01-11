@@ -20,7 +20,8 @@ const propertyState = (state = [], action) => {
         name: action.property.name,
         location: action.property.location
       }];
-
+    case 'DELETE_PROPERTY':
+      return state.filter(property => (property.id !== action.property.id));
     case 'POPULATE_PROPERTIES':   
       return action.properties;
     default:
