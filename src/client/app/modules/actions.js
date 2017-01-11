@@ -19,3 +19,10 @@ export const populateProperties = (properties) => {
     properties
   }
 }
+
+export const populateBookings = (bookings) => {
+  return {
+    type: 'POPULATE_BOOKINGS',
+    bookings
+  }
+}
