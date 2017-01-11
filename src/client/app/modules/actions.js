@@ -13,9 +13,23 @@ export const addProperty = (property) => {
   }
 }
 
+export const deleteProperty = (property) => {
+  return {
+    type: 'DELETE_PROPERTY',
+    property
+  }
+}
+
 export const populateProperties = (properties) => {
   return {
     type: 'POPULATE_PROPERTIES',
     properties
+  }
+}
+
+export const populateBookings = (bookings) => {
+  return {
+    type: 'POPULATE_BOOKINGS',
+    bookings
   }
 }

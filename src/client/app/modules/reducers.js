@@ -20,21 +20,24 @@ const propertyState = (state = [], action) => {
         name: action.property.name,
         location: action.property.location
       }];
-
+    case 'DELETE_PROPERTY':
+      return state.filter(property => (property.id !== action.property.id));
     case 'POPULATE_PROPERTIES':   
       return action.properties;
-
-      // .map(property => {
-      //   return {
-      //   name: property.name,
-      //   location: property.location  
-      //   };
-      // });
     default:
       return state;
   }
 };
 
-const reducers = combineReducers({userState, propertyState});
+const bookingState = (state = [], action) => {
+  switch (action.type) {
+    case 'POPULATE_BOOKINGS':
+      return action.bookings;
+    default:
+      return state;
+  }
+}
+
+const reducers = combineReducers({userState, propertyState, bookingState});
 
 export default reducers;

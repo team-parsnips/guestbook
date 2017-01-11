@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
@@ -14,9 +13,6 @@ import GraphIcon from 'material-ui/svg-icons/action/assessment';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
-
-
-
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: deepOrange500 }
@@ -38,7 +34,6 @@ class Main extends React.Component {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
           <LoginContainer />
-
         </MuiThemeProvider>
       );
     } else {
@@ -58,6 +53,7 @@ class Main extends React.Component {
             </Tabs>
             <div className='container'>
               {this.props.children}
+              <Link to='/map'>Map</Link>
             </div>
           </div>
         </MuiThemeProvider>
