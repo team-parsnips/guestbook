@@ -13,7 +13,6 @@ const PropertyCard = (props) => {
         showExpandableButton={true} />
       <CardActions expandable={true}>
         <RaisedButton label='Generate QR Code' onTouchTap={props.handleGenerateQR}/>
-        <img id='map'></img>
       </CardActions>
     </Card>
   );

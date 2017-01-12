@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {deleteProperty} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -31,7 +32,8 @@ class PropertiesContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addProp: false
+      addProp: false,
+      open: false
     };
     this.openHandler = this.openHandler.bind(this);
   }
@@ -49,6 +51,8 @@ class PropertiesContainer extends React.Component {
   handleGenerateQR(property) {
     axios.get('/qrCode', {responseType: 'arraybuffer'})
     .then((res) => {
+      this.setState({open: true});
+      var map = document.getElementById('map');
       var arr = new Uint8Array(res.data);
       var raw = String.fromCharCode.apply(null, arr);
       var b64 = btoa(raw);
@@ -56,9 +60,29 @@ class PropertiesContainer extends React.Component {
     })
   }
 
+  // handles closing of dialog
+  handleClose() {
+    this.setState({open: false});
+  }
+
   render() {
+    const actions = [
+      <RaisedButton
+        label="Close"
+        primary={true}
+        onTouchTap={() => this.handleClose()}/>
+    ];
     return (
       <div>
+        <Dialog
+          title="QR Code"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={() => this.handleClose()}>
+            <img id='map'></img>
+        </Dialog>
+
         <PropertyList 
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
