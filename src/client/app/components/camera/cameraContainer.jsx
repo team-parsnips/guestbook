@@ -1,8 +1,5 @@
 import React from 'react';
-import QrCode from 'qrcode-reader';
 import QrReader from 'react-qr-reader'
-
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 const previewStyle = {
   height: '240px',
@@ -21,9 +18,10 @@ class CameraContainer extends React.Component {
     this.setState({
       result: data,
     });
+    // redirect to read url after 1 sec.
     setTimeout(function() {
       window.location.href = data;
-    }, 2000);
+    }, 1000);
   }
 
   handleError(err){
