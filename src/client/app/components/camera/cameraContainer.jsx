@@ -20,22 +20,31 @@ class CameraContainer extends React.Component {
   handleScan(data){
     this.setState({
       result: data,
-    })
+    });
+    setTimeout(function() {
+      window.location.href = data;
+    }, 2000);
   }
 
   handleError(err){
     console.error(err)
   }
 
+  handleSubmit() {
+    this.qrReader.openImageDialog();
+  }
+
   render() {
     return (
       <div>
-
         <QrReader
           previewStyle={previewStyle}
           handleError={this.handleError}
           handleScan={this.handleScan.bind(this)}
-          legacyMode={false}/>
+          legacyMode={true}
+          ref={(qrReader) => {this.qrReader = qrReader}}
+          maxImageSize={750} />
+        <button onClick={() => this.handleSubmit()}>Open Image Dialog</button>
         <p>{this.state.result}</p>
       </div>
     )
