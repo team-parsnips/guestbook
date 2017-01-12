@@ -54,6 +54,7 @@ class Main extends React.Component {
             <div className='container'>
               {this.props.children}
               <Link to='/map'>Map</Link>
+              <Link to='/camera'>Camera</Link>
             </div>
           </div>
         </MuiThemeProvider>
