@@ -20,7 +20,9 @@ class PropertyList extends React.Component {
         this.props.properties.map((property, i) => (
           <SwipeableViews index={0} onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={property.id}>
             <div>
-              <PropertyCard property={property} />
+              <PropertyCard 
+                property={property} 
+                handleGenerateQR={this.props.handleGenerateQR}/>
             </div>
             <div>
               <Card style={deleteStyle}>

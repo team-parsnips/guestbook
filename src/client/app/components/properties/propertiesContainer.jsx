@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import {deleteProperty} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import RaisedButton from 'material-ui/RaisedButton';
-
 
 import PropertyList from './propertyList.jsx';
 import AddPropForm from './addPropForm.jsx';
@@ -32,9 +32,9 @@ class PropertiesContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addProp: false
+      addProp: false,
+      open: false
     };
-
     this.openHandler = this.openHandler.bind(this);
   }
 
@@ -42,22 +42,54 @@ class PropertiesContainer extends React.Component {
     this.setState({addProp: !this.state.addProp});
   }
 
-  componentDidMount() {
-
-  }
-
+  // removes property from redux/db
   deleteProperty(property) {
     this.props.dispatch(deleteProperty(property));
   }
 
+  // gets QR Code handling check-in of that property
+  handleGenerateQR(property) {
+    axios.get('/qrCode', {responseType: 'arraybuffer'})
+    .then((res) => {
+      this.setState({open: true});
+      var map = document.getElementById('map');
+      var arr = new Uint8Array(res.data);
+      var raw = String.fromCharCode.apply(null, arr);
+      var b64 = btoa(raw);
+      map.src = 'data:image/png;base64,' + b64;
+    })
+  }
+
+  // handles closing of dialog
+  handleClose() {
+    this.setState({open: false});
+  }
+
   render() {
+    const actions = [
+      <RaisedButton
+        label="Close"
+        primary={true}
+        onTouchTap={() => this.handleClose()}/>
+    ];
     return (
       <div>
+        <Dialog
+          title="QR Code"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={() => this.handleClose()}>
+            <img id='map'></img>
+        </Dialog>
+
         <PropertyList 
-          properties={this.props.properties}deleteProperty={(property) => this.deleteProperty(property)}/>
+          properties={this.props.properties}
+          deleteProperty={(property) => this.deleteProperty(property)}
+          handleGenerateQR={() => this.handleGenerateQR()}/>
         <Card
-        onTouchTap={()=> {this.openHandler()}}
-        style={cardStyle}
+          onTouchTap={()=> {this.openHandler()}}
+          style={cardStyle}
         >
         <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
         </Card>
