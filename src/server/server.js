@@ -6,6 +6,7 @@ var db = require('./db');
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
 var bookingRouter = require('./routers/bookingRouter.js');
+var qrCodeRouter = require('./routers/qrCodeRouter.js');
 
 // configure middleware
 require('./config/middleware.js')(app, express);
@@ -14,6 +15,7 @@ require('./config/middleware.js')(app, express);
 app.use('/', userRouter);
 app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
+app.use('/qrCode', qrCodeRouter);
 
 
 // setup to serve static files
