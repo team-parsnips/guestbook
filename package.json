@@ -38,6 +38,7 @@
     "qrcode-reader": "^0.2.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-qr-reader": "^0.3.2",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "react-swipeable-views": "^0.10.3",
