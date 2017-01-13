@@ -50,6 +50,7 @@ class LoginContainer extends React.Component {
         label='Sign In'
         fullWidth={true}
         onTouchTap={() => this.handleSignIn()}
+        id='loginButton'
       />
     ];
 
@@ -65,12 +66,14 @@ class LoginContainer extends React.Component {
           ref='email'
           hintText='Email Address'
           fullWidth={true}
+          id='email'
         /><br />
         <TextField
           ref='password'
           hintText='Password'
           fullWidth={true}
           type='password'
+          id='password'
         /> 
       </Dialog>
     );
