@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -24,7 +25,7 @@ const socket = io();
 
 const mapStateToProps = function(store) {
   return {
-    loggedIn: store.guestState.checkedIn
+    checkedIn: store.guestState.checkedIn
   };
 }
 
@@ -40,11 +41,14 @@ class Guest extends React.Component {
   }
 
   handleCheckIn() {
-    this.setState({
-      checkedIn: true,
-      checkInTime: new Date()
-    });
-    // send notification to the host
+    // this.setState({
+    //   checkedIn: true,
+    //   checkInTime: new Date()
+    // });
+    // axios.put('/')
+    //   .then()
+
+    // }
   }
 
   render() {
@@ -61,12 +65,10 @@ class Guest extends React.Component {
                   <RaisedButton
                     label="Check in!"
                     secondary={true}
-                    onClick={this.handleCheckIn}
                     style={styles.button}/>
                 </Link>}>
               <img src="https://a2.muscache.com/im/pictures/74bc45b3-d473-4e5a-b927-2989bfd31834.jpg?aki_policy=xx_large" />
-            </CardMedia>
-            
+            </CardMedia>   
             <CardText>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.

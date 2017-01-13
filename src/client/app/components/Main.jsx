@@ -7,6 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardHeader} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import GraphIcon from 'material-ui/svg-icons/action/assessment';
@@ -21,6 +23,10 @@ const muiTheme = getMuiTheme({
 const homeIcon = <HomeIcon />;
 const graphIcon = <GraphIcon />;
 const settingsIcon = <SettingsIcon />;
+
+const style = {
+  margin: 12,
+};
 
 const mapStateToProps = function(store) {
   return {
@@ -59,6 +65,14 @@ class Main extends React.Component {
               <Link to='/map'>Map</Link>
               <Link to='/camera'>Camera</Link>
             </div>
+            <div>
+              <Link to='/properties'>
+                <RaisedButton label="Host" style={style} />
+              </Link>
+              <Link to='/guest'>
+                <RaisedButton label="Guest" style={style} />
+              </Link>
+          </div>
           </div>
         </MuiThemeProvider>
       );

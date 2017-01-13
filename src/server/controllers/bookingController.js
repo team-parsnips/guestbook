@@ -17,12 +17,14 @@ module.exports = {
 
   },
   
-  put: function(req, res, next) {
+  updateBooking: function(req, res, next) {
     var bookingId = req.params.id;
     var checkInTime = req.body.checkInTime;
     db.Booking.findOne({id: bookingId})
       .then(function(booking) {
         booking.checkInTime = checkInTime;
+        res.send('booking updated!');
+        // TODO: should also handle checkOutTime
       });
   },
 
