@@ -50,6 +50,9 @@ class Main extends React.Component {
               <Tab
               label='SETTINGS' value={2} icon={settingsIcon}
               containerElement={<Link to='/settings'></Link>}/>
+              <Tab
+              label='GUEST' value={3} icon={settingsIcon}
+              containerElement={<Link to='/guest'></Link>}/>
             </Tabs>
             <div className='container'>
               {this.props.children}

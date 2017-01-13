@@ -27,9 +27,17 @@ export const populateProperties = (properties) => {
   }
 }
 
-export const populateBookings = (bookings) => {
+// export const populateBookings = (bookings) => {
+//   return {
+//     type: 'POPULATE_BOOKINGS',
+//     bookings
+//   }
+// }
+
+export const checkIn = (guest) => {
   return {
-    type: 'POPULATE_BOOKINGS',
-    bookings
+    type: 'GUEST_CHECKIN', 
+    checkInTime: checkInTime,
+    checkedIn: true
   }
 }

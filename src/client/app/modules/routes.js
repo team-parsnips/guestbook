@@ -5,6 +5,8 @@ import Properties from '../components/properties/propertiesContainer.jsx';
 import Analytics from '../components/analytics/analytics.jsx';
 import MapContainer from '../components/map/mapContainer.jsx';
 import CameraContainer from '../components/camera/cameraContainer.jsx';
+import Guest from '../components/guest/guest.jsx';
+import Greet from '../components/guest/greet.jsx';
 
 module.exports = (
   <Route path='/' component={Main}>
@@ -12,6 +14,8 @@ module.exports = (
     <Route path='/analytics' component={Analytics} />
     <Route path='/map' component={MapContainer} />
     <Route path='/camera' component={CameraContainer} />
+    <Route path='/guest' component={Guest} />
+    <Route path='/greetGuest' component={Greet} />
   </Route>
 
 );

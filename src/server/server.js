@@ -2,6 +2,8 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var db = require('./db');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -17,7 +19,6 @@ app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
 app.use('/qrCode', qrCodeRouter);
 
-
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
 
@@ -26,8 +27,18 @@ app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
 
+// add connection listener
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+
 var port = (process.env.PORT || 4000);
-app.listen(port, function() {
-  console.log('Guestbook is listening at', port);
-})
+server.listen(port, function(){
+  console.log('listening on *:4000');
+});
+
+// app.listen(port, function() {
+//   console.log('Guestbook is listening at', port);
+// })
 

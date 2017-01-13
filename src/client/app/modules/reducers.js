@@ -33,8 +33,11 @@ const bookingState = (state = [], action) => {
   switch (action.type) {
     case 'POPULATE_BOOKINGS':
       return action.bookings;
+    case 'GUEST_CHECKIN':
+      return action.checkIn;
     default:
       return state;
+
   }
 }
 
