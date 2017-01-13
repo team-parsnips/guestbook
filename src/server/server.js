@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var db = require('./db');
-var server = require('http').createServer(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var userRouter = require('./routers/userRouter.js');
@@ -27,9 +27,12 @@ app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
 
-// add connection listener
-io.on('connection', function(socket){
-  console.log('a user connected');
+// add listeners when connection is open
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });
 
 
@@ -41,4 +44,9 @@ server.listen(port, function(){
 // app.listen(port, function() {
 //   console.log('Guestbook is listening at', port);
 // })
+
+
+server.listen(80);
+
+
 

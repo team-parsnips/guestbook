@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import io from 'socket.io-client';
+// import io from 'socket.io';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -23,24 +23,24 @@ const styles = {
 
 const socket = io();
 
-const mapStateToProps = function(store) {
-  return {
-    checkedIn: store.guestState.checkedIn
-  };
-}
+// const mapStateToProps = function(store) {
+//   return {
+//     checkedIn: store.guestState.checkedIn
+//   };
+// }
 
 class Guest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleCheckIn = this.handleCheckIn.bind(this);
+    // this.handleCheckIn = this.handleCheckIn.bind(this);
   }
 
-  componentDidMount() {
-    socket.on('checkin', this.handleCheckIn);
-  }
+  // componentDidMount() {
+    // socket.on('checkin', this.handleCheckIn);
+  // }
 
-  handleCheckIn() {
+  // handleCheckIn() {
     // this.setState({
     //   checkedIn: true,
     //   checkInTime: new Date()
@@ -49,7 +49,7 @@ class Guest extends React.Component {
     //   .then()
 
     // }
-  }
+  // }
 
   render() {
     return (
@@ -59,14 +59,7 @@ class Guest extends React.Component {
             <CardHeader
               title="get from redux"
             />
-            <CardMedia
-              overlay={
-                <Link to='/greet'>
-                  <RaisedButton
-                    label="Check in!"
-                    secondary={true}
-                    style={styles.button}/>
-                </Link>}>
+            <CardMedia overlay={<p>Enjoy your stay!</p>}>
               <img src="https://a2.muscache.com/im/pictures/74bc45b3-d473-4e5a-b927-2989bfd31834.jpg?aki_policy=xx_large" />
             </CardMedia>   
             <CardText>
@@ -82,7 +75,9 @@ class Guest extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Guest);
+export default Guest;
+
+// export default connect(mapStateToProps)(Guest);
 
 // export default connect(mapStateToProps)(Guest);
             // <div className='container'>
