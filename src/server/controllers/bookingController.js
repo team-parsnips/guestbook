@@ -22,9 +22,8 @@ module.exports = {
     var checkInTime = req.body.checkInTime;
     db.Booking.findOne({id: bookingId})
       .then(function(booking) {
-        booking.checkInTime = checkInTime;
-        res.send('booking updated!');
-        // TODO: should also handle checkOutTime
+        booking['checkInTime'] = checkInTime;
+        res.send(booking);
       });
   },
 

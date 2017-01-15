@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import io from 'socket.io-client';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -8,13 +9,15 @@ import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardHeader} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import Snackbar from 'material-ui/Snackbar';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import GraphIcon from 'material-ui/svg-icons/action/assessment';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
+
+const socket = io();
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: deepOrange500 }
@@ -35,6 +38,26 @@ const mapStateToProps = function(store) {
 }
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+    socket.on('user checked in', () => this.handleGuestCheckin());
+  }
+
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  }
+
+  handleGuestCheckIn(guestName) {
+    this.setState({
+      open: true,
+    });
+  }
+
   render() {
     if (!this.props.loggedIn) {
       return (
@@ -56,9 +79,6 @@ class Main extends React.Component {
               <Tab
               label='SETTINGS' value={2} icon={settingsIcon}
               containerElement={<Link to='/settings'></Link>}/>
-              <Tab
-              label='GUEST' value={3} icon={settingsIcon}
-              containerElement={<Link to='/guest'></Link>}/>
             </Tabs>
             <div className='container'>
               {this.props.children}
@@ -72,7 +92,13 @@ class Main extends React.Component {
               <Link to='/guest'>
                 <RaisedButton label="Guest" style={style} />
               </Link>
-          </div>
+            </div>
+            <Snackbar
+              open={this.state.open}
+              message="<A guest has checked into your property!"
+              autoHideDuration={4000}
+              onRequestClose={this.handleRequestClose}
+            />
           </div>
         </MuiThemeProvider>
       );

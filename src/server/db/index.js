@@ -2,7 +2,10 @@ var Sequelize = require('sequelize');
 var db = new Sequelize('guestbook', 'root', '');
 
 var User = db.define('User', {
-  email: Sequelize.STRING,
+  email: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   password: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING

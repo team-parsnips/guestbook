@@ -2,14 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import axios from 'axios';
-// import io from 'socket.io';
+import io from 'socket.io-client';
+
+import {checkIn} from '../../modules/actions';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-
+import FlatButton from 'material-ui/FlatButton';
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: '#E0F2F1' }
@@ -23,33 +24,41 @@ const styles = {
 
 const socket = io();
 
-// const mapStateToProps = function(store) {
-//   return {
-//     checkedIn: store.guestState.checkedIn
-//   };
-// }
+const mapStateToProps = function(store) {
+  return {
+    checkedIn: store.bookingState.checkedIn,
+    // propertyName: store.propertyState.name
+  };
+}
 
 class Guest extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    // this.handleCheckIn = this.handleCheckIn.bind(this);
+    this.state = {
+      hostId: ''
+    };
   }
 
-  // componentDidMount() {
-    // socket.on('checkin', this.handleCheckIn);
-  // }
+  handleCheckIn() {
+    let {dispatch} = this.props;
 
-  // handleCheckIn() {
-    // this.setState({
-    //   checkedIn: true,
-    //   checkInTime: new Date()
-    // });
-    // axios.put('/')
-    //   .then()
+    axios.put('/booking/402', {checkInTime: new Date()})
+      .then((response) => {
+        dispatch(checkIn(response.data));
+        var propertyId = response.data.PropertyId;
+        axios.get('/property/' + propertyId)
+          .then((property) => {
+            var userId = property.data.UserId;
+            this.setState({hostId: userId});
+          })
+      })
+      .catch(err => {
+        console.error('Error updating booking with check-in time', err);
+      });
 
-    // }
-  // }
+    // socket.emit('checkIn', {hostId: this.state.hostId});
+    socket.emit('checkIn');
+  }
 
   render() {
     return (
@@ -57,7 +66,7 @@ class Guest extends React.Component {
         <div> 
           <Card>
             <CardHeader
-              title="get from redux"
+              
             />
             <CardMedia overlay={<p>Enjoy your stay!</p>}>
               <img src="https://a2.muscache.com/im/pictures/74bc45b3-d473-4e5a-b927-2989bfd31834.jpg?aki_policy=xx_large" />
@@ -68,6 +77,9 @@ class Guest extends React.Component {
               Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
               Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
             </CardText>
+            <FlatButton 
+              label="CheckIn" 
+              onClick={this.handleCheckIn.bind(this)} />
           </Card>
         </div>
       </MuiThemeProvider>
@@ -75,11 +87,5 @@ class Guest extends React.Component {
   }
 }
 
-export default Guest;
 
-// export default connect(mapStateToProps)(Guest);
-
-// export default connect(mapStateToProps)(Guest);
-            // <div className='container'>
-            //   {this.props.children}
-            // </div>
+export default connect(mapStateToProps)(Guest);

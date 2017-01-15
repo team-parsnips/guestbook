@@ -2,8 +2,10 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var db = require('./db');
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var socketHandler = require('./socketHandler.js');
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -28,25 +30,24 @@ app.get('/*', function(req, res) {
 });
 
 // add listeners when connection is open
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+io.sockets.on('connection', function (socket) {
 
+  socket.on('hostLogin', function(data) {
+    socket.id = data.hostId;
+  });
+
+  socket.on('checkIn', function (data) {
+    socket.to(socket.id).emit("user checked in");   
+  });
+
+});
+// io.on('connection', function(socket) {
+//   console.log('socket id', socket.id);
+//   // socket.to('checkin', (msg) => console.log('message', msg))
+// });
 
 var port = (process.env.PORT || 4000);
-server.listen(port, function(){
-  console.log('listening on *:4000');
+
+http.listen(port, function() {
+  console.log('Guestbook is listening at', port);
 });
-
-// app.listen(port, function() {
-//   console.log('Guestbook is listening at', port);
-// })
-
-
-server.listen(80);
-
-
-

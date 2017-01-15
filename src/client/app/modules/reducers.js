@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import update from 'react-addons-update';
 
 const userState = (state = {}, action) => {
   switch (action.type) {
@@ -34,12 +35,18 @@ const bookingState = (state = [], action) => {
     case 'POPULATE_BOOKINGS':
       return action.bookings;
     case 'GUEST_CHECKIN':
-      return action.checkIn;
+      return state.map((booking) => {
+        if (booking.id === action.booking.id) {
+          return action.booking;
+        } else {
+          return booking;
+        }
+      });
     default:
       return state;
 
   }
-}
+};
 
 const reducers = combineReducers({userState, propertyState, bookingState});
 
