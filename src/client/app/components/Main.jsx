@@ -43,6 +43,7 @@ class Main extends React.Component {
     this.state = {
       open: false,
     };
+    socket.emit('hostLogIn', {hostId: 1});
     socket.on('user checked in', () => this.handleGuestCheckin());
   }
 

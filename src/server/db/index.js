@@ -34,8 +34,8 @@ Booking.belongsTo(Property);
 User.sync();
 Property.sync();
 Booking.sync();
+
 // creates these tables in MySQL if they don't already exist. Pass in {force: true}
-// to drop any existing user and message tables and make new ones.
 
 exports.User = User;
 exports.Property = Property;

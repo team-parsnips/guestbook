@@ -16,7 +16,7 @@ const customContentStyle = {
   height: '50%'
 };
 
-const socket = io();
+// const socket = io();
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class LoginContainer extends React.Component {
       console.error('Error fetching properties and bookings', err);
     });
 
-    socket.emit('hostLogIn', {hostId: 1});
+    // socket.emit('hostLogIn', {hostId: 1});
   }
 
   render() {

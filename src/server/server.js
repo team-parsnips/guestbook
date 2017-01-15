@@ -29,25 +29,31 @@ app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
 
-// add listeners when connection is open
+//add listeners when connection is open
 io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
+  // customize socket id to be 
+  console.log('socket connection opened!');
 
   socket.on('hostLogin', function(data) {
+    console.log('socket id before', socket.id);
     socket.id = data.hostId;
+    console.log('socket id after', socket.id);
   });
 
-  socket.on('checkIn', function (data) {
+  io.on('checkIn', function (socket) {
     socket.to(socket.id).emit("user checked in");   
   });
 
 });
-// io.on('connection', function(socket) {
-//   console.log('socket id', socket.id);
-//   // socket.to('checkin', (msg) => console.log('message', msg))
-// });
 
 var port = (process.env.PORT || 4000);
+
+// app.listen(port, function() {
+//   console.log('Guestbook is listening at', port);
+// });
 
 http.listen(port, function() {
   console.log('Guestbook is listening at', port);
 });
+
