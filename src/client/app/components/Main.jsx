@@ -17,7 +17,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
 
-const socket = io();
+// const socket = io();
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: deepOrange500 }
@@ -45,22 +45,22 @@ class Main extends React.Component {
     };
   }
 
-  componentDidMount() {
-    socket.emit('hostLogin', {hostId: 1});
-    socket.on('user checked in', () => this.handleGuestCheckIn());
-  }
+  // componentDidMount() {
+  //   socket.emit('hostLogin', {hostId: 1});
+  //   socket.on('user checked in', () => this.handleGuestCheckIn());
+  // }
 
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  }
+  // handleRequestClose() {
+  //   this.setState({
+  //     open: false,
+  //   });
+  // }
 
-  handleGuestCheckIn() {
-    this.setState({
-      open: true,
-    });
-  }
+  // handleGuestCheckIn() {
+  //   this.setState({
+  //     open: true,
+  //   });
+  // }
 
   render() {
     if (!this.props.loggedIn) {
@@ -89,20 +89,6 @@ class Main extends React.Component {
               <Link to='/map'>Map</Link>
               <Link to='/camera'>Camera</Link>
             </div>
-            <div>
-              <Link to='/properties'>
-                <RaisedButton label="Host" style={style} />
-              </Link>
-              <Link to='/guest'>
-                <RaisedButton label="Guest" style={style} />
-              </Link>
-            </div>
-            <Snackbar
-              open={this.state.open}
-              message="<A guest has checked into your property!"
-              autoHideDuration={4000}
-              onRequestClose={this.handleRequestClose.bind(this)}
-            />
           </div>
         </MuiThemeProvider>
       );
@@ -111,3 +97,9 @@ class Main extends React.Component {
 }
 
 export default connect(mapStateToProps)(Main);
+            // <Snackbar
+            //   open={this.state.open}
+            //   message="A guest has checked into your property!"
+            //   autoHideDuration={4000}
+            //   onRequestClose={this.handleRequestClose.bind(this)}
+            // />

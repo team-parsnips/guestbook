@@ -5,7 +5,7 @@ var db = require('./db');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var socketHandler = require('./socketHandler.js');
+// var socketHandler = require('./socketHandler.js');
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -29,6 +29,10 @@ app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
 
+app.get('/unsplash', function(req, res) {
+  res.sendFile('unsplash.jpg', {root: __dirname});
+});
+
 //add listeners when connection is open
 // io.sockets.on('connection', function (socket) {
 io.on('connection', function (socket) {
@@ -45,8 +49,9 @@ io.on('connection', function (socket) {
 
   socket.on('checkIn', function () {
     console.log('got check in')
-    // io.to(socket.id).emit("user checked in");   
-    io.to('hosts').emit('user checked in')
+    // io.to(socket.id).emit("user checked in"); 
+    socket.broadcast.emit('user checked in');  
+    // io.to('hosts').emit('user checked in')
   });
 
 });
