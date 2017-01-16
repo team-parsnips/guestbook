@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import axios from 'axios';
 import io from 'socket.io-client';
-
+import LoginContainer from './loginContainer.jsx';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardMedia} from 'material-ui/Card';
@@ -42,7 +42,8 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      loginOpen: false
     };
   }
 
@@ -63,24 +64,27 @@ class Splash extends React.Component {
     });
   }
 
+  handleLogin() {
+    this.setState({
+      loginOpen: true,
+    });
+  }
+
   render() {
+    var login = this.state.loginOpen ? <LoginContainer /> : null;
     return (
       <MuiThemeProvider>
-        <div>
         <div style={divStyle}>
-          <Link to='/guest'>
+          <Link to='/camera'>
             <RaisedButton label="Guest" style={buttonStyle} />
           </Link>
-          <Link to='/host'>
-            <RaisedButton label="Host" style={buttonStyle} />
-          </Link>
-        </div>
+            <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
+            { login }
         <Snackbar
           open={this.state.open}
           message="A guest has checked into your property!"
           autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose.bind(this)}
-        />
+          onRequestClose={this.handleRequestClose.bind(this)}/>
         </div>
       </MuiThemeProvider>
     );

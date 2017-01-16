@@ -26,6 +26,12 @@ app.use('/', express.static(path.join(__dirname, '../client')));
 
 // general redirect for full client side rendering of pages
 app.get('/*', function(req, res) {
+  // checks if code query exists
+  // need to exchange code for token and verify token 
+  if (req.query.code) {
+    console.log('code received');
+    res.redirect('/properties');
+  }
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
 

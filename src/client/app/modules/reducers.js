@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import update from 'react-addons-update';
 
 const userState = (state = {}, action) => {
   switch (action.type) {
