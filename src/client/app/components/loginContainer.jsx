@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import io from 'socket.io-client';
 
 import {signIn, populateProperties, populateBookings} from '../modules/actions';
 
@@ -15,6 +16,8 @@ const customContentStyle = {
   height: '50%'
 };
 
+// const socket = io();
+
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -28,11 +31,10 @@ class LoginContainer extends React.Component {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
     }
-
     // store user object within redux
     dispatch(signIn(user));
-
     // hydrates redux store with all of user's properties and bookings
+    // get allData for a specific user
     axios.get('/allData')
     .then(response => {
       dispatch(populateProperties(response.data.properties));
@@ -42,6 +44,7 @@ class LoginContainer extends React.Component {
       console.error('Error fetching properties and bookings', err);
     });
 
+    // socket.emit('hostLogIn', {hostId: 1});
   }
 
   render() {

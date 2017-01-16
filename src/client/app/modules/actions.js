@@ -33,3 +33,13 @@ export const populateBookings = (bookings) => {
     bookings
   }
 }
+
+export const checkIn = (booking) => {
+  return {
+    type: 'GUEST_CHECKIN', 
+    booking
+    // checkInTime: new Date(),
+    // checkedIn: true,
+
+  }
+}

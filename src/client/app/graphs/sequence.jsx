@@ -73,9 +73,8 @@ class SequenceSunBurst extends React.Component {
       var json = buildHierarchy(csv);
       createVisualization(json);
     });*/
-    
-    Utils.getBookings(Utils.bookingMap, createVisualization);
 
+    Utils.getBookings(Utils.bookingMap, createVisualization);   
     // Main function to draw and set up the visualization, once we have the data.
     function createVisualization(json) {
 
