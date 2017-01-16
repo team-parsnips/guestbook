@@ -42,7 +42,7 @@ class Guest extends React.Component {
   handleCheckIn() {
     let {dispatch} = this.props;
 
-    axios.put('/booking/402', {checkInTime: new Date()})
+    axios.put('/booking/1', {checkInTime: new Date()})
       .then((response) => {
         dispatch(checkIn(response.data));
         var propertyId = response.data.PropertyId;

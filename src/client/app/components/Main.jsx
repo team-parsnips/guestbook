@@ -43,8 +43,11 @@ class Main extends React.Component {
     this.state = {
       open: false,
     };
-    socket.emit('hostLogIn', {hostId: 1});
-    socket.on('user checked in', () => this.handleGuestCheckin());
+  }
+
+  componentDidMount() {
+    socket.emit('hostLogin', {hostId: 1});
+    socket.on('user checked in', () => this.handleGuestCheckIn());
   }
 
   handleRequestClose() {
@@ -53,7 +56,7 @@ class Main extends React.Component {
     });
   }
 
-  handleGuestCheckIn(guestName) {
+  handleGuestCheckIn() {
     this.setState({
       open: true,
     });
@@ -98,7 +101,7 @@ class Main extends React.Component {
               open={this.state.open}
               message="<A guest has checked into your property!"
               autoHideDuration={4000}
-              onRequestClose={this.handleRequestClose}
+              onRequestClose={this.handleRequestClose.bind(this)}
             />
           </div>
         </MuiThemeProvider>
