@@ -16,6 +16,7 @@ var Property = db.define('Property', {
   location: Sequelize.STRING,
   checkInTime: Sequelize.STRING,
   checkOutTime: Sequelize.STRING,
+  photo: Sequelize.TEXT
 });
 
 var Booking = db.define('Booking', {
