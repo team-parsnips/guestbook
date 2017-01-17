@@ -11,10 +11,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
 
-
 const divStyle = {
   display: 'flex',
   overflow: 'hidden',
+  position: 'absolute',
   width: '100%',
   height: '100%',
   'backgroundImage': 'url("/unsplash2.jpg")',
@@ -23,11 +23,12 @@ const divStyle = {
 };
 
 const logoStyle = {
-  textAlign: 'center',
-  height: '400px',
-  width: '400px',
+  // textAlign: 'center',
+  height: '550px',
+  width: '550px',
+  marginTop: '60%',
+  marginLeft: '2%',
   position: 'relative',
-  // margin: '19% 27%',
   zIndex: '3'
 };
 
@@ -80,6 +81,8 @@ class Splash extends React.Component {
           </Link>
             <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
             { login }
+          <img src='/guestbook.png' style={logoStyle} />
+        </div>
         <Snackbar
           open={this.state.open}
           message="A guest has checked into your property!"
