@@ -27,10 +27,15 @@ class LoginContainer extends React.Component {
   }
 
   handleSignIn() {
-    let user = {
+/*    let user = {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
-    }
+    }*/
+    let user = {
+      email: 'test',
+      password: 'test'
+    };
+    this.props.dispatch(signIn(user));
     browserHistory.push('/properties');
     // socket.emit('hostLogIn', {hostId: 1});
   }
@@ -42,7 +47,7 @@ class LoginContainer extends React.Component {
         fullWidth={true}
         onTouchTap={() => this.handleSignIn()}
         id='loginButton'/>,
-      <FbLogin />
+      <FbLogin handleSignIn={() => this.handleSignIn()}/>
     ];
 
     return (

@@ -9,10 +9,12 @@ class Settings extends React.Component {
 
   handleLogOut() {
     // check if logged into FB
-    FB.logout((res) => {
-      console.log('logout res', res);
-      browserHistory.push('/');
-    });
+    if (FB) {
+      FB.logout((res) => {
+        browserHistory.push('/');
+      });
+    }
+    
   }
 
   render() {
