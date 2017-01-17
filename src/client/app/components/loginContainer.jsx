@@ -26,28 +26,15 @@ class LoginContainer extends React.Component {
   }
 
   fbLogin() {
-    this.handleSignIn();
+    // relocates to fb auth page and then redirects to properties
     window.location = "https://www.facebook.com/v2.8/dialog/oauth?client_id=1736938369968580&redirect_uri=http://localhost:4000/properties";
   }
 
   handleSignIn() {
-    let {dispatch} = this.props;
     let user = {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
     }
-    // store user object within redux
-    dispatch(signIn(user));
-    // hydrates redux store with all of user's properties and bookings
-    // get allData for a specific user
-    axios.get('/allData')
-    .then(response => {
-      dispatch(populateProperties(response.data.properties));
-      dispatch(populateBookings(response.data.bookings));
-    })
-    .catch(err => {
-      console.error('Error fetching properties and bookings', err);
-    });
     browserHistory.push('/properties');
     // socket.emit('hostLogIn', {hostId: 1});
   }

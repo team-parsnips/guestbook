@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import {connect} from 'react-redux';
-import {deleteProperty} from '../../modules/actions';
+import {populateProperties, populateBookings, deleteProperty} from '../../modules/actions';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
@@ -36,6 +36,19 @@ class PropertiesContainer extends React.Component {
       open: false
     };
     this.openHandler = this.openHandler.bind(this);
+  }
+
+  componentWillMount() {
+    let {dispatch} = this.props;
+    // hydrates redux store with all of user's properties and bookings
+    axios.get('/allData')
+    .then(response => {
+      dispatch(populateProperties(response.data.properties));
+      dispatch(populateBookings(response.data.bookings));
+    })
+    .catch(err => {
+      console.error('Error fetching properties and bookings', err);
+    });
   }
 
   openHandler() {
