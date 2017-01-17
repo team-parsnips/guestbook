@@ -5,12 +5,8 @@ var db = require('./db');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var axios = require('axios');
-var expressJWT = require('express-jwt');
-var jwt = require('jsonwebtoken');
 
 // var socketHandler = require('./socketHandler.js');
-var token = undefined;
-
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
 var bookingRouter = require('./routers/bookingRouter.js');
