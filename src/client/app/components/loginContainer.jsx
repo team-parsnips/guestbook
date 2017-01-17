@@ -9,6 +9,7 @@ import {signIn, populateProperties, populateBookings} from '../modules/actions';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FbLogin from './login/fbLogin.jsx';
 
 const customContentStyle = {
   width: '75%',
@@ -23,11 +24,6 @@ class LoginContainer extends React.Component {
     super(props);
     this.state = {};
     this.handleSignIn = this.handleSignIn.bind(this);
-  }
-
-  fbLogin() {
-    // relocates to fb auth page and then redirects to properties
-    window.location = "https://www.facebook.com/v2.8/dialog/oauth?client_id=1736938369968580&redirect_uri=http://localhost:4000/properties";
   }
 
   handleSignIn() {
@@ -46,11 +42,7 @@ class LoginContainer extends React.Component {
         fullWidth={true}
         onTouchTap={() => this.handleSignIn()}
         id='loginButton'/>,
-      <RaisedButton
-        label='Login with Facebook'
-        backgroundColor='#3B5998'
-        fullWidth={true}
-        onTouchTap={() => this.fbLogin()} />
+      <FbLogin />
     ];
 
     return (
