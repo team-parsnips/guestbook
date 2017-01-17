@@ -15,9 +15,9 @@ module.exports = (
     <Route path='/properties' component={Properties} />
     <Route path='/analytics' component={Analytics} />
     <Route path='/map' component={MapContainer} />
-    <Route path='/guest' component={Guest} />
   </Route>
     <Route path='/' component={Splash} />
     <Route path='/camera' component={CameraContainer} />
+    <Route path='/guest' component={Guest} />
   </div>
 );
