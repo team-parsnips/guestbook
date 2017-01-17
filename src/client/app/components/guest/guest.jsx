@@ -65,21 +65,9 @@ class Guest extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div> 
           <Card>
-            <CardHeader
-              
-            />
-            <CardMedia overlay={<p>Enjoy your stay!</p>}>
+            <CardMedia>
               <img src="https://a2.muscache.com/im/pictures/74bc45b3-d473-4e5a-b927-2989bfd31834.jpg?aki_policy=xx_large" />
             </CardMedia>   
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-            </CardText>
-            <FlatButton 
-              label="CheckIn" 
-              onClick={this.handleCheckIn.bind(this)} />
           </Card>
         </div>
       </MuiThemeProvider>

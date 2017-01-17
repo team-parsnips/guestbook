@@ -11,6 +11,9 @@ const PropertyCard = (props) => {
         subtitle={props.property.address}
         actAsExpander={true}
         showExpandableButton={true} />
+      <CardMedia>
+        <img src={props.property.photo} />
+      </CardMedia>
       <CardActions expandable={true}>
         <RaisedButton label='Generate QR Code' onTouchTap={props.handleGenerateQR}/>
       </CardActions>

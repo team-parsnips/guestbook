@@ -8,6 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardHeader} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -66,6 +67,13 @@ class Main extends React.Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+
+          <AppBar
+            title="guestbook"
+            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            
+          />
+
           <Tabs>
             <Tab
             label='MY PROPERTIES' value={0} icon={homeIcon}
@@ -95,9 +103,3 @@ class Main extends React.Component {
 }
 
 export default connect(mapStateToProps)(Main);
-            <Snackbar
-              open={this.state.open}
-              message="A guest has checked into your property!"
-              autoHideDuration={4000}
-              onRequestClose={this.handleRequestClose.bind(this)}
-            />
