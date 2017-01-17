@@ -63,36 +63,28 @@ class Main extends React.Component {
   // }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <LoginContainer />
-        </MuiThemeProvider>
-      );
-    } else {
-      return (
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
-            <Tabs>
-              <Tab
-              label='MY PROPERTIES' value={0} icon={homeIcon}
-              containerElement={<Link to='/properties'></Link>}/>
-              <Tab
-              label='MY ANALYTICS' value={1} icon={graphIcon}
-              containerElement={<Link to='/analytics'></Link>}/>
-              <Tab
-              label='SETTINGS' value={2} icon={settingsIcon}
-              containerElement={<Link to='/settings'></Link>}/>
-            </Tabs>
-            <div className='container'>
-              {this.props.children}
-              <Link to='/map'>Map</Link>
-              <Link to='/camera'>Camera</Link>
-            </div>
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <Tabs>
+            <Tab
+            label='MY PROPERTIES' value={0} icon={homeIcon}
+            containerElement={<Link to='/properties'></Link>}/>
+            <Tab
+            label='MY ANALYTICS' value={1} icon={graphIcon}
+            containerElement={<Link to='/analytics'></Link>}/>
+            <Tab
+            label='SETTINGS' value={2} icon={settingsIcon}
+            containerElement={<Link to='/settings'></Link>}/>
+          </Tabs>
+          <div className='container'>
+            {this.props.children}
+            <Link to='/map'>Map</Link>
+            <Link to='/camera'>Camera</Link>
           </div>
-        </MuiThemeProvider>
-      );
-    }
+        </div>
+      </MuiThemeProvider>
+    );
   }
 }
 
