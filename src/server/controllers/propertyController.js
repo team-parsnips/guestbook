@@ -2,7 +2,7 @@ var db = require('../db');
 
 module.exports = {
   getProperty: function(req, res, next) {
-    db.Property.findOne({id: req.params.id}) //TODO: change id to propertyId to match schema
+    db.Property.findOne({where: {id: req.params.id}}) //TODO: change id to propertyId to match schema
     .then(function(property) {
       res.send(property);
     });

@@ -41,9 +41,26 @@ const mapStateToProps = function(store) {
 class Guest extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      hostId: ''
+      hostId: '',
+      propertyName: undefined,
+      propertyPic: undefined,
     };
+  }
+
+  componentWillMount() {
+    // populates state with property info based on url param
+    var propertyId = this.props.params.id;
+    var context = this;
+    axios.get('/property/' + propertyId)
+    .then((res) => {
+      context.setState({
+        propertyName: res.data.name,
+        propertyPic: res.data.photo,
+      });
+
+    });
   }
 
   handleCheckIn() {
@@ -76,7 +93,7 @@ class Guest extends React.Component {
           backgroundSize: 'cover'}}> 
           </div> 
           <div className="div2" style={textStyle}>
-            <p style={{fontSize: '18px'}}>{"you're checked in at " + this.props.propertyName}</p> 
+            <p style={{fontSize: '18px'}}>{"you're checked in at " + this.state.propertyName}</p> 
             <p style={{fontSize: '50px'}}>Enjoy.</p>
           </div>  
         </div>
