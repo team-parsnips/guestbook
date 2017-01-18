@@ -1,10 +1,23 @@
 import React from 'react';
 import QrReader from 'react-qr-reader'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const previewStyle = {
-  height: '240px',
-  width: '320px',
-}
+const buttonStyle = {
+  margin: 12,
+  width: '100px',
+  height: '44px',
+  marginTop: '20%',
+  // backgroundColor: '#90A4AE'
+};
+
+const labelStyle = {
+  fontSize: '24px',
+  textAlign: 'center',
+  color: 'white',
+  fontFamily: 'Pacifico',
+  textTransform: 'lowercase'
+};
 
 class CameraContainer extends React.Component {
   constructor(props) {
@@ -12,16 +25,6 @@ class CameraContainer extends React.Component {
     this.state = {
       result: 'No result',
     }
-  }
-
-  handleScan(data){
-    this.setState({
-      result: data,
-    });
-    // redirect to read url after 1 sec.
-    setTimeout(function() {
-      window.location.href = data;
-    }, 1000);
   }
 
   handleError(err){
@@ -34,17 +37,23 @@ class CameraContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <QrReader
-          previewStyle={previewStyle}
-          handleError={this.handleError}
-          handleScan={this.handleScan.bind(this)}
-          legacyMode={true}
-          ref={(qrReader) => {this.qrReader = qrReader}}
-          maxImageSize={750} />
-        <button onClick={() => this.handleSubmit()}>Open Image Dialog</button>
-        <p>{this.state.result}</p>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <QrReader
+            handleError={this.props.handleError}
+            handleImageNotRecognized={this.props.handleError}
+            handleScan={this.props.handleScan}
+            legacyMode={true}
+            ref={(qrReader) => {this.qrReader = qrReader}}
+            maxImageSize={750} />
+          <RaisedButton 
+            backgroundColor='#90A4AE'
+            label="guest"
+            style={buttonStyle}
+            labelStyle={labelStyle}
+            onTouchTap={() => this.handleSubmit()}/>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

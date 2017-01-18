@@ -39,8 +39,6 @@ const appStyle = {
   height: '10%',
 }
 
-
-
 const titleStyle ={
   color: '#757575',
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
@@ -88,8 +86,7 @@ class Main extends React.Component {
             titleStyle={titleStyle}
             style={appStyle}
             showMenuIconButton={false}
-            iconElementRight={<Logout />}
-          />
+            iconElementRight={<Logout />}/>
           <Tabs>
             <Tab
             label='MY PROPERTIES' value={0} icon={homeIcon}
@@ -110,8 +107,7 @@ class Main extends React.Component {
             open={this.state.open}
             message="A guest has checked into your property!"
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose.bind(this)}
-          />
+            onRequestClose={this.handleRequestClose.bind(this)}/>
         </div>
       </MuiThemeProvider>
     );

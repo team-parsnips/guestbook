@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import axios from 'axios';
 import LoginContainer from './loginContainer.jsx';
-
+import CameraContainer from './camera/cameraContainer.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardMedia} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
@@ -50,7 +50,9 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginOpen: false
+      loginOpen: false,
+      open: false,
+      message: ''
     };
   }
 
@@ -58,6 +60,24 @@ class Splash extends React.Component {
     this.setState({
       loginOpen: true,
     });
+  }
+
+  handleRequestClose() {
+    this.setState({open: false});
+  }
+
+  // displays snackbar on a successful qr code scan
+  handleScan(data) {
+    this.setState({open: true, message: 'Please wait. Checking in now...'});
+    setTimeout(function() {
+      window.location.href = data;
+    }, 1000);
+  }
+
+  // displays error snackbar on bad qr code scan
+  handleError(err) {
+    console.log('error', err);
+    this.setState({open: true, message: 'Sorry, I couldn\'t get that. Please try scanning again'});
   }
 
   render() {
@@ -77,15 +97,15 @@ class Splash extends React.Component {
               onTouchTap={() => this.handleLogin()}
               labelStyle={labelStyle} />
             {login}
-            <Link to='/camera'>
-              <RaisedButton 
-                backgroundColor='#90A4AE'
-                label="guest"
-                style={buttonStyle}
-                labelStyle={labelStyle}
-                />
-            </Link>
+            <CameraContainer 
+              handleScan={(data) => this.handleScan(data)}
+              handleError={(err) => this.handleError(err)}/>
           </div>
+          <Snackbar
+            open={this.state.open}
+            message={this.state.message}
+            autoHideDuration={2000}
+            onRequestClose={() => this.handleRequestClose()}/>
         </div>
       </MuiThemeProvider>
     );
@@ -94,20 +114,3 @@ class Splash extends React.Component {
 
 
 export default Splash;
-
-
-        // <div style={divStyle}>
-        //   <div style={{height: '550px', width:'550px', display: 'inline-block'}}>
-        //     <img src='/guestbook3.png' style={logoStyle} />
-        //   </div>
-        //   <div style={{display: 'inline-block'}}>
-        //     <Link to='/camera'>
-        //       <RaisedButton 
-        //         label="Guest"
-        //         style={buttonStyle}
-        //         fullWidth={true} />
-        //     </Link>
-        //     <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
-        //       { login }
-        //   </div>
-        // </div>
