@@ -5,13 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const buttonStyle = {
   margin: 12,
-  width: '400px',
-  height: '100px',
-  marginTop: '20%'
+  width: '100px',
+  height: '44px',
+  marginTop: '20%',
+  // backgroundColor: '#90A4AE'
 };
 
 const labelStyle = {
-  fontSize: '75px',
+  fontSize: '24px',
   textAlign: 'center',
   color: 'white',
   fontFamily: 'Pacifico',

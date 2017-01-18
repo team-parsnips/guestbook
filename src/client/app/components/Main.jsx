@@ -39,8 +39,6 @@ const appStyle = {
   height: '10%',
 }
 
-
-
 const titleStyle ={
   color: '#757575',
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',

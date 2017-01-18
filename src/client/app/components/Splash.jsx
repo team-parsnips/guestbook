@@ -114,20 +114,3 @@ class Splash extends React.Component {
 
 
 export default Splash;
-
-
-        // <div style={divStyle}>
-        //   <div style={{height: '550px', width:'550px', display: 'inline-block'}}>
-        //     <img src='/guestbook3.png' style={logoStyle} />
-        //   </div>
-        //   <div style={{display: 'inline-block'}}>
-        //     <Link to='/camera'>
-        //       <RaisedButton 
-        //         label="Guest"
-        //         style={buttonStyle}
-        //         fullWidth={true} />
-        //     </Link>
-        //     <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
-        //       { login }
-        //   </div>
-        // </div>
