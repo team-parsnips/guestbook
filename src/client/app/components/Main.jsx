@@ -7,9 +7,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardHeader} from 'material-ui/Card';
-// import {Tabs, Tab} from 'material-ui/Tabs';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
@@ -33,8 +34,17 @@ const style = {
 };
 
 const appStyle = {
-  backgroundColor: 'white'
+  backgroundColor: 'white',
+  height: '7%',
 }
+
+const labelStyle = {
+  color: '#757575',
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '50px',
+  textTransform: 'lowercase'
+  // marginBottom: '50%'
+};
 
 const mapStateToProps = function(store) {
   return {
@@ -73,9 +83,22 @@ class Main extends React.Component {
         <div>
           <AppBar
             title="guestbook"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            titleStyle={labelStyle}
             style={appStyle}
+            iconElementRight={<FlatButton label="Logout" style={{height: '100px'}}
+            labelStyle={labelStyle} />}
           />
+          <Tabs>
+            <Tab
+            label='MY PROPERTIES' value={0} icon={homeIcon}
+            containerElement={<Link to='/properties'></Link>}/>
+            <Tab
+            label='MY ANALYTICS' value={1} icon={graphIcon}
+            containerElement={<Link to='/analytics'></Link>}/>
+            <Tab
+            label='SETTINGS' value={2} icon={settingsIcon}
+            containerElement={<Link to='/settings'></Link>}/>
+          </Tabs>
           <div className='container'>
             {this.props.children}
             <Link to='/map'>Map</Link>
@@ -94,14 +117,3 @@ class Main extends React.Component {
 }
 
 export default connect(mapStateToProps)(Main);
-          // <Tabs>
-          //   <Tab
-          //   label='MY PROPERTIES' value={0} icon={homeIcon}
-          //   containerElement={<Link to='/properties'></Link>}/>
-          //   <Tab
-          //   label='MY ANALYTICS' value={1} icon={graphIcon}
-          //   containerElement={<Link to='/analytics'></Link>}/>
-          //   <Tab
-          //   label='SETTINGS' value={2} icon={settingsIcon}
-          //   containerElement={<Link to='/settings'></Link>}/>
-          // </Tabs>

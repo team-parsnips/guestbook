@@ -31,17 +31,18 @@ const logoStyle = {
 
 const buttonStyle = {
   margin: 12,
-  width: '300px',
-  height: '75px',
+  width: '400px',
+  height: '100px',
   marginTop: '20%',
   // backgroundColor: '#90A4AE'
 };
 
 const labelStyle = {
-  fontSize: '50px',
+  fontSize: '75px',
   textAlign: 'center',
   color: 'white',
-  textFont: ''
+  fontFamily: 'Pacifico',
+  textTransform: 'lowercase'
 };
 
 
@@ -69,21 +70,21 @@ class Splash extends React.Component {
           </div>
           <div className='divTwo' 
           style={{display: 'inline-block', height: '55%', width: '100%', textAlign: 'center'}}>
-            <Link to='/camera'>
-              <RaisedButton 
-                backgroundColor='#90A4AE'
-                label="Guest"
-                style={buttonStyle}
-                labelStyle={labelStyle}
-                />
-            </Link>
             <RaisedButton 
               backgroundColor='#90A4AE'
-              label="Host" 
+              label="host" 
               style={buttonStyle} 
               onTouchTap={() => this.handleLogin()}
               labelStyle={labelStyle} />
             {login}
+            <Link to='/camera'>
+              <RaisedButton 
+                backgroundColor='#90A4AE'
+                label="guest"
+                style={buttonStyle}
+                labelStyle={labelStyle}
+                />
+            </Link>
           </div>
         </div>
       </MuiThemeProvider>
