@@ -18,8 +18,8 @@ export default (store) => (
     <Route path='/settings' component={Settings} />
   </Route>
     <Route path='/' component={Splash} />
-    <Route path='/camera' component={CameraContainer} />
     <Route path='/guest' component={Guest} />
+    <Route path='/camera' component={CameraContainer} />
   </div>
 );
 

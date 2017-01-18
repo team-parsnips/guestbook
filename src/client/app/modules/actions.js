@@ -6,6 +6,12 @@ export const signIn = (user) => {
   }
 }
 
+export const signOut = () => {
+  return {
+    type: 'USER_SIGNOUT',
+  }
+}
+
 export const addProperty = (property) => {
   return {
     type: 'ADD_PROPERTY',

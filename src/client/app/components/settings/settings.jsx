@@ -1,6 +1,8 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import {signOut} from '../../modules/actions';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Settings extends React.Component {
   constructor() {
@@ -8,13 +10,12 @@ class Settings extends React.Component {
   }
 
   handleLogOut() {
+    this.props.dispatch(signOut());
+    this.props.router.push('/');
     // check if logged into FB
-    if (FB) {
-      FB.logout((res) => {
-        browserHistory.push('/');
-      });
-    }
-    
+    FB.logout((res) => {
+      browserHistory.push('/');
+    });
   }
 
   render() {
@@ -27,4 +28,4 @@ class Settings extends React.Component {
   }
 }
 
-export default Settings;
+export default connect()(Settings);

@@ -45,9 +45,6 @@ class Main extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
   // componentDidMount() {
   //   socket.emit('hostLogin', {hostId: 1});
   //   socket.on('user checked in', () => this.handleGuestCheckIn());

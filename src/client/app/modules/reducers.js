@@ -7,7 +7,10 @@ const userState = (state = {}, action) => {
         user: action.user,
         loggedIn: true
       });
-
+    case 'USER_SIGNOUT':
+      return {
+        loggedIn: false
+      }
     default:
       return state;
   }
