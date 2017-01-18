@@ -22,23 +22,23 @@ const divStyle = {
 };
 
 const logoStyle = {
-  height: '450px',
-  width: '450px',
+  height: '200px',
+  width: '200px',
   marginTop: '50%',
-  marginLeft: '27%',
+  marginLeft: '25%',
   zIndex: '3'
 };
 
 const buttonStyle = {
   margin: 12,
-  width: '400px',
-  height: '100px',
+  width: '100px',
+  height: '44px',
   marginTop: '20%',
   // backgroundColor: '#90A4AE'
 };
 
 const labelStyle = {
-  fontSize: '75px',
+  fontSize: '24px',
   textAlign: 'center',
   color: 'white',
   fontFamily: 'Pacifico',

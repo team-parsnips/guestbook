@@ -33,7 +33,8 @@ const socket = io();
 const mapStateToProps = function(store) {
   return {
     // checkedIn: store.bookingState.checkedIn,
-    propertyName: store.propertyState.name
+    propertyName: store.propertyState.name,
+    // property: store.propertyState.name
   };
 }
 
@@ -71,11 +72,12 @@ class Guest extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={divStyle}>
           <div style={{display: 'inline-block', height: '70%', width: '100%', 
-          background: 'url("https://s-media-cache-ak0.pinimg.com/564x/ea/5c/66/ea5c66e6c551fcdf4669523ba83a62df.jpg") no-repeat center', backgroundSize: 'cover'}}> 
+          background: 'url("https://s-media-cache-ak0.pinimg.com/564x/ea/5c/66/ea5c66e6c551fcdf4669523ba83a62df.jpg") no-repeat center',
+          backgroundSize: 'cover'}}> 
           </div> 
           <div className="div2" style={textStyle}>
-            <p style={{fontSize: '40px'}}>you're checked in at ...</p> 
-            <p style={{fontSize: '150px'}}>Enjoy.</p>
+            <p style={{fontSize: '18px'}}>{"you're checked in at " + this.props.propertyName}</p> 
+            <p style={{fontSize: '50px'}}>Enjoy.</p>
           </div>  
         </div>
       </MuiThemeProvider>

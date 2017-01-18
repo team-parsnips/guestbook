@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 const cardStyle = {
-  height: '500px',
+  height: '200px',
   width: '80%',
   margin: '0 auto',
   marginBottom: '50px'

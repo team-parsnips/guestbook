@@ -18,6 +18,7 @@ import GraphIcon from 'material-ui/svg-icons/action/assessment';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
+import Logout from './logout/logout.jsx';
 
 const socket = io();
 
@@ -35,16 +36,17 @@ const style = {
 
 const appStyle = {
   backgroundColor: 'white',
-  height: '7%',
+  height: '10%',
 }
 
-const labelStyle = {
+
+
+const titleStyle ={
   color: '#757575',
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
-  fontSize: '50px',
+  fontSize: '25px',
   textTransform: 'lowercase'
-  // marginBottom: '50%'
-};
+}
 
 const mapStateToProps = function(store) {
   return {
@@ -83,10 +85,10 @@ class Main extends React.Component {
         <div>
           <AppBar
             title="guestbook"
-            titleStyle={labelStyle}
+            titleStyle={titleStyle}
             style={appStyle}
-            iconElementRight={<FlatButton label="Logout" style={{height: '100px'}}
-            labelStyle={labelStyle} />}
+            showMenuIconButton={false}
+            iconElementRight={<Logout />}
           />
           <Tabs>
             <Tab

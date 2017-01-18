@@ -21,7 +21,8 @@ const propertyState = (state = [], action) => {
     case 'ADD_PROPERTY':
       return [...state, {
         name: action.property.name,
-        location: action.property.location
+        location: action.property.location,
+        photo: action.property.photo
       }];
     case 'DELETE_PROPERTY':
       return state.filter(property => (property.id !== action.property.id));
