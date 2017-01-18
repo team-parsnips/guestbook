@@ -100,12 +100,19 @@ class Splash extends React.Component {
             <CameraContainer 
               handleScan={(data) => this.handleScan(data)}
               handleError={(err) => this.handleError(err)}/>
+            <Link to='/camera'>
+              <RaisedButton 
+                backgroundColor='#90A4AE'
+                label="guest"
+                style={buttonStyle}
+                labelStyle={labelStyle} />
+            </Link>
+            <Snackbar
+              open={this.state.open}
+              message={this.state.message}
+              autoHideDuration={2000}
+              onRequestClose={() => this.handleRequestClose()}/>
           </div>
-          <Snackbar
-            open={this.state.open}
-            message={this.state.message}
-            autoHideDuration={2000}
-            onRequestClose={() => this.handleRequestClose()}/>
         </div>
       </MuiThemeProvider>
     );
