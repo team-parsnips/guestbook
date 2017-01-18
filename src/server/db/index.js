@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('database', 'root', 'parsnips', {
-  host: 'database',
-  // host: '0.0.0.0',
-  port: '3306'
+var db = new Sequelize('guestbook', 'root', '', {
+/*  host: 'localhost',
+  host: '0.0.0.0',
+  port: '3306'*/
 });
 
 var User = db.define('User', {
