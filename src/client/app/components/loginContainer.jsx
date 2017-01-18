@@ -9,6 +9,7 @@ import {signIn, populateProperties, populateBookings} from '../modules/actions';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 import FbLogin from './login/fbLogin.jsx';
 
 const customContentStyle = {
@@ -17,6 +18,22 @@ const customContentStyle = {
   height: '50%'
 };
 
+const titleStyle = {
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '20px',
+  // color: '#616161'
+}
+
+const fieldStyle = {
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '14px',
+}
+
+const labelStyle = {
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '16px',
+  textTransform: 'capitalize',
+}
 // const socket = io();
 
 class LoginContainer extends React.Component {
@@ -65,15 +82,17 @@ class LoginContainer extends React.Component {
     const actions = [
       <RaisedButton
         label='Sign In'
+        labelStyle={labelStyle}
         fullWidth={true}
         onTouchTap={() => this.handleSignIn()}
-        id='loginButton'/>,
-      <FbLogin handleSignIn={(email, id, firstName, lastName) => this.handleFbSignIn(email, id, firstName, lastName)}/>
+        id='loginButton' />,
+      <FbLogin handleSignIn={(email, id, firstName, lastName) => this.handleFbSignIn(email, id, firstName, lastName)} />
     ];
 
     return (
       <Dialog
-        title='Welcome to GuestBook! Please sign in'
+        title='Welcome to guestbook! Please sign in'
+        titleStyle={titleStyle}
         actions={actions}
         modal={true}
         contentStyle={customContentStyle}
@@ -84,6 +103,7 @@ class LoginContainer extends React.Component {
           hintText='Email Address'
           fullWidth={true}
           id='email'
+          style={fieldStyle}
         /><br />
         <TextField
           ref='password'
@@ -91,6 +111,7 @@ class LoginContainer extends React.Component {
           fullWidth={true}
           type='password'
           id='password'
+          style={fieldStyle}
         /> 
       </Dialog>
     );

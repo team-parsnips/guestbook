@@ -5,11 +5,10 @@ import io from 'socket.io-client';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {blueGrey300, grey600} from 'material-ui/styles/colors';
+import {deepOrange500} from 'material-ui/styles/colors';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+
 import Paper from 'material-ui/Paper';
-import FontIcon from 'material-ui/FontIcon';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
@@ -17,13 +16,14 @@ import Snackbar from 'material-ui/Snackbar';
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import GraphIcon from 'material-ui/svg-icons/action/assessment';
 
+
 import LoginContainer from './loginContainer.jsx';
 import Logout from './logout/logout.jsx';
 
 const socket = io();
 
 const muiTheme = getMuiTheme({
-  palette: { accent1Color: blueGrey300}
+  palette: { accent1Color: deepOrange500 }
 });
 
 // const homeIcon = <FontIcon className="material-icons">home</FontIcon>;
@@ -47,7 +47,7 @@ const titleStyle ={
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
   fontSize: '25px',
   textTransform: 'lowercase',
-  marginLeft: '32%'
+  // marginLeft: '32%'
 };
 
 const navStyle = {
