@@ -8,7 +8,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {Card, CardHeader} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
@@ -17,7 +19,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
 
-// const socket = io();
+const socket = io();
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: deepOrange500 }
@@ -29,6 +31,19 @@ const settingsIcon = <SettingsIcon />;
 
 const style = {
   margin: 12,
+};
+
+const appStyle = {
+  backgroundColor: 'white',
+  height: '7%',
+}
+
+const labelStyle = {
+  color: '#757575',
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '50px',
+  textTransform: 'lowercase'
+  // marginBottom: '50%'
 };
 
 const mapStateToProps = function(store) {
@@ -45,27 +60,34 @@ class Main extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   socket.emit('hostLogin', {hostId: 1});
-  //   socket.on('user checked in', () => this.handleGuestCheckIn());
-  // }
+  componentDidMount() {
+    socket.emit('hostLogin', {hostId: 1});
+    socket.on('user checked in', () => this.handleGuestCheckIn());
+  }
 
-  // handleRequestClose() {
-  //   this.setState({
-  //     open: false,
-  //   });
-  // }
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  }
 
-  // handleGuestCheckIn() {
-  //   this.setState({
-  //     open: true,
-  //   });
-  // }
+  handleGuestCheckIn() {
+    this.setState({
+      open: true,
+    });
+  }
 
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+          <AppBar
+            title="guestbook"
+            titleStyle={labelStyle}
+            style={appStyle}
+            iconElementRight={<FlatButton label="Logout" style={{height: '100px'}}
+            labelStyle={labelStyle} />}
+          />
           <Tabs>
             <Tab
             label='MY PROPERTIES' value={0} icon={homeIcon}
@@ -82,6 +104,12 @@ class Main extends React.Component {
             <Link to='/map'>Map</Link>
             <Link to='/camera'>Camera</Link>
           </div>
+          <Snackbar
+            open={this.state.open}
+            message="A guest has checked into your property!"
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose.bind(this)}
+          />
         </div>
       </MuiThemeProvider>
     );
@@ -89,9 +117,3 @@ class Main extends React.Component {
 }
 
 export default connect(mapStateToProps)(Main);
-            // <Snackbar
-            //   open={this.state.open}
-            //   message="A guest has checked into your property!"
-            //   autoHideDuration={4000}
-            //   onRequestClose={this.handleRequestClose.bind(this)}
-            // />

@@ -40,7 +40,8 @@ function addProperties() {
           name: property.name,
           location: property.location,
           checkInTime: property.checkInTime,
-          checkOutTime: property.checkOutTime
+          checkOutTime: property.checkOutTime,
+          photo: property.photo
         });
       });
     }, Promise.resolve())

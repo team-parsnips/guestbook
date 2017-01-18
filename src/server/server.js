@@ -34,22 +34,17 @@ app.get('/*', function(req, res) {
 });
 
 //add listeners when connection is open
-// io.sockets.on('connection', function (socket) {
 io.on('connection', function (socket) {
-  // customize socket id to be 
   console.log('socket connection opened!');
 
   socket.on('hostLogin', function(data) {
     console.log('got host login')
+    // join hosts room
     socket.join('hosts');
-    // console.log('socket id before', socket.id);
-    // socket.id = data.hostId;
-    // console.log('socket id after', socket.id);
   });
 
   socket.on('checkIn', function () {
-    console.log('got check in')
-    // io.to(socket.id).emit("user checked in"); 
+    console.log('got guest check in')
     socket.broadcast.emit('user checked in');  
     // io.to('hosts').emit('user checked in')
   });

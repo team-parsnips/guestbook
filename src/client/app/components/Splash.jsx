@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import axios from 'axios';
-import io from 'socket.io-client';
 import LoginContainer from './loginContainer.jsx';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,57 +10,48 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
 
-
 const divStyle = {
   display: 'flex',
-  overflow: 'hidden',
+  position: 'relative',
   width: '100%',
   height: '100%',
-  'backgroundImage': 'url("/unsplash2.jpg")',
-  'backgroundRepeat': 'no-repeat',
-  'objectFit': 'cover' 
+  backgroundImage: 'url("/unsplash2.jpg")',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  flexDirection: 'column',
 };
 
 const logoStyle = {
-  textAlign: 'center',
-  height: '400px',
-  width: '400px',
-  position: 'relative',
-  // margin: '19% 27%',
+  height: '450px',
+  width: '450px',
+  marginTop: '50%',
+  marginLeft: '27%',
   zIndex: '3'
 };
 
 const buttonStyle = {
   margin: 12,
+  width: '400px',
+  height: '100px',
+  marginTop: '20%',
+  // backgroundColor: '#90A4AE'
 };
 
-const socket = io();
+const labelStyle = {
+  fontSize: '75px',
+  textAlign: 'center',
+  color: 'white',
+  fontFamily: 'Pacifico',
+  textTransform: 'lowercase'
+};
 
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       loginOpen: false
     };
-  }
-
-  componentDidMount() {
-    socket.emit('hostLogin', {hostId: 1});
-    socket.on('user checked in', () => this.handleGuestCheckIn());
-  }
-
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  }
-
-  handleGuestCheckIn() {
-    this.setState({
-      open: true,
-    });
   }
 
   handleLogin() {
@@ -75,16 +65,27 @@ class Splash extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={divStyle}>
-          <Link to='/camera'>
-            <RaisedButton label="Guest" style={buttonStyle} />
-          </Link>
-            <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
-            { login }
-        <Snackbar
-          open={this.state.open}
-          message="A guest has checked into your property!"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose.bind(this)}/>
+          <div className='divOne' style={{display: 'inline-block', height: '55%', width: '100%'}}>
+            <img src='/guestbook3.png' style={logoStyle} />
+          </div>
+          <div className='divTwo' 
+          style={{display: 'inline-block', height: '55%', width: '100%', textAlign: 'center'}}>
+            <RaisedButton 
+              backgroundColor='#90A4AE'
+              label="host" 
+              style={buttonStyle} 
+              onTouchTap={() => this.handleLogin()}
+              labelStyle={labelStyle} />
+            {login}
+            <Link to='/camera'>
+              <RaisedButton 
+                backgroundColor='#90A4AE'
+                label="guest"
+                style={buttonStyle}
+                labelStyle={labelStyle}
+                />
+            </Link>
+          </div>
         </div>
       </MuiThemeProvider>
     );
@@ -93,16 +94,20 @@ class Splash extends React.Component {
 
 
 export default Splash;
-// export default connect()(LoginContainer);
-              //<img src='/unsplash2.jpg' />
 
-              /*<Card style={divStyle}>
-            <CardMedia mediaStyle={imgStyle}>
-              <img src='/unsplash2.jpg' style={imgStyle} />    
-            </CardMedia>
-          </Card>
-          */
-              //<Paper style={logoStyle} zDepth={1} circle={true} />
-      // <div style={divStyle}>
-      //  
-      // </div>
+
+        // <div style={divStyle}>
+        //   <div style={{height: '550px', width:'550px', display: 'inline-block'}}>
+        //     <img src='/guestbook3.png' style={logoStyle} />
+        //   </div>
+        //   <div style={{display: 'inline-block'}}>
+        //     <Link to='/camera'>
+        //       <RaisedButton 
+        //         label="Guest"
+        //         style={buttonStyle}
+        //         fullWidth={true} />
+        //     </Link>
+        //     <RaisedButton label="Host" onTouchTap={() => this.handleLogin()} />
+        //       { login }
+        //   </div>
+        // </div>

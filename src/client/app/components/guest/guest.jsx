@@ -4,30 +4,36 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-import {checkIn} from '../../modules/actions';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {deepOrange500} from 'material-ui/styles/colors';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 
 const muiTheme = getMuiTheme({
   palette: { accent1Color: '#E0F2F1' }
 });
 
-const styles = {
-  button: {
-    margin: 12,
-  }
+const divStyle = {
+  display: 'flex',
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  flexDirection: 'column',
+}
+
+const textStyle = {
+  display: 'inline-block',
+  height: '45%',
+  width: '100%',
+  fontFamily: 'Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif',
+  textAlign: 'center',
+  color: '#757575'
 };
 
 const socket = io();
 
 const mapStateToProps = function(store) {
   return {
-    checkedIn: store.bookingState.checkedIn,
-    // propertyName: store.propertyState.name
+    // checkedIn: store.bookingState.checkedIn,
+    propertyName: store.propertyState.name
   };
 }
 
@@ -63,24 +69,14 @@ class Guest extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div> 
-          <Card>
-            <CardHeader
-              
-            />
-            <CardMedia overlay={<p>Enjoy your stay!</p>}>
-              <img src="https://a2.muscache.com/im/pictures/74bc45b3-d473-4e5a-b927-2989bfd31834.jpg?aki_policy=xx_large" />
-            </CardMedia>   
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-            </CardText>
-            <FlatButton 
-              label="CheckIn" 
-              onClick={this.handleCheckIn.bind(this)} />
-          </Card>
+        <div style={divStyle}>
+          <div style={{display: 'inline-block', height: '70%', width: '100%', 
+          background: 'url("https://s-media-cache-ak0.pinimg.com/564x/ea/5c/66/ea5c66e6c551fcdf4669523ba83a62df.jpg") no-repeat center', backgroundSize: 'cover'}}> 
+          </div> 
+          <div className="div2" style={textStyle}>
+            <p style={{fontSize: '40px'}}>you're checked in at ...</p> 
+            <p style={{fontSize: '150px'}}>Enjoy.</p>
+          </div>  
         </div>
       </MuiThemeProvider>
     );
