@@ -69,6 +69,11 @@ class Splash extends React.Component {
     this.setState({open: false});
   }
 
+  // displays snackbar for login messages
+  handleLoginMessages(message) {
+    this.setState({open: true, message: message});
+  }
+
   // displays snackbar on a successful qr code scan
   handleScan(data) {
     this.setState({open: true, message: 'Please wait. Checking in now...'});
@@ -84,7 +89,7 @@ class Splash extends React.Component {
   }
 
   render() {
-    var login = this.state.loginOpen ? <LoginContainer /> : null;
+    var login = this.state.loginOpen ? <LoginContainer handleLoginMessages={(message) => this.handleLoginMessages(message)}/> : null;
     return (
       <MuiThemeProvider>
         <div style={divStyle}>
@@ -99,7 +104,7 @@ class Splash extends React.Component {
               style={buttonStyle} 
               onTouchTap={() => this.handleLogin()}
               labelStyle={labelStyle} />
-            {login}
+            { login }
             <CameraContainer 
               handleScan={(data) => this.handleScan(data)}
               handleError={(err) => this.handleError(err)}/>
