@@ -22,7 +22,7 @@ const PropertyCard = (props) => {
         <img src={props.property.photo} />
       </CardMedia>
       <CardActions expandable={true}>
-        <RaisedButton label='Generate QR Code' onTouchTap={props.handleGenerateQR}/>
+        <RaisedButton label='Generate QR Code' onTouchTap={() => props.handleGenerateQR(props.property)}/>
       </CardActions>
     </Card>
   );

@@ -51,6 +51,7 @@ class PropertiesContainer extends React.Component {
     });
   }
 
+  // handles opening card with adding a property
   openHandler() {
     this.setState({addProp: !this.state.addProp});
   }
@@ -62,7 +63,7 @@ class PropertiesContainer extends React.Component {
 
   // gets QR Code handling check-in of that property
   handleGenerateQR(property) {
-    axios.get('/qrCode', {responseType: 'arraybuffer'})
+    axios.get('/qrCode/' + property.id, {responseType: 'arraybuffer'})
     .then((res) => {
       this.setState({open: true});
       var map = document.getElementById('map');
@@ -73,7 +74,7 @@ class PropertiesContainer extends React.Component {
     })
   }
 
-  // handles closing of dialog
+  // handles closing of qrcode dialog
   handleClose() {
     this.setState({open: false});
   }
@@ -93,18 +94,18 @@ class PropertiesContainer extends React.Component {
           modal={false}
           open={this.state.open}
           onRequestClose={() => this.handleClose()}>
-            <img id='map'></img>
+          <img id='map'></img>
         </Dialog>
 
         <PropertyList 
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
-          handleGenerateQR={() => this.handleGenerateQR()}/>
+          handleGenerateQR={(property) => this.handleGenerateQR(property)}/>
         <Card
           onTouchTap={()=> {this.openHandler()}}
           style={cardStyle}
         >
-        <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
+          <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
         </Card>
         <AddPropForm openHandler={this.openHandler} open={this.state.addProp}/>
       </div>

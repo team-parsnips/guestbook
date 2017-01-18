@@ -15,7 +15,7 @@ export default (store) => (
     <Route path='/map' component={MapContainer} />
   </Route>
     <Route path='/' component={Splash} />
-    <Route path='/guest' component={Guest} />
+    <Route path='/guest/:id' component={Guest} />
   </div>
 );
 
