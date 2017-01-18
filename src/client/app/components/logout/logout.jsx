@@ -2,9 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {signOut} from '../../modules/actions';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
-class Settings extends React.Component {
+
+const labelStyle = {
+  color: '#757575',
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '18px',
+  textTransform: 'lowercase'
+  // marginBottom: '50%'
+};
+
+class Logout extends React.Component {
   constructor() {
     super();
   }
@@ -20,12 +29,13 @@ class Settings extends React.Component {
 
   render() {
     return (
-      <RaisedButton
+      <FlatButton
         label='Logout'
-        backgroundColor='#FF0800'
+        labelStyle={labelStyle}
         onTouchTap={() => this.handleLogOut()} />
     )
   }
 }
 
-export default connect()(Settings);
+
+export default connect()(Logout);
