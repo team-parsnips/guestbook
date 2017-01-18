@@ -4,13 +4,16 @@ var app = express();
 var db = require('./db');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var axios = require('axios');
 
 // var socketHandler = require('./socketHandler.js');
-
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
 var bookingRouter = require('./routers/bookingRouter.js');
 var qrCodeRouter = require('./routers/qrCodeRouter.js');
+
+// setup to serve static files
+app.use('/', express.static(path.join(__dirname, '../client')));
 
 // configure middleware
 require('./config/middleware.js')(app, express);
@@ -21,22 +24,13 @@ app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
 app.use('/qrCode', qrCodeRouter);
 
-// setup to serve static files
-app.use('/', express.static(path.join(__dirname, '../client')));
+app.get('/auth', function(req, res) {
+  res.send(token);
+});
 
 // general redirect for full client side rendering of pages
 app.get('/*', function(req, res) {
-  // checks if code query exists
-  // need to exchange code for token and verify token 
-  if (req.query.code) {
-    console.log('code received');
-    res.redirect('/properties');
-  }
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
-});
-
-app.get('/unsplash', function(req, res) {
-  res.sendFile('unsplash.jpg', {root: __dirname});
 });
 
 //add listeners when connection is open
@@ -63,10 +57,6 @@ io.on('connection', function (socket) {
 });
 
 var port = (process.env.PORT || 4000);
-
-// app.listen(port, function() {
-//   console.log('Guestbook is listening at', port);
-// });
 
 http.listen(port, function() {
   console.log('Guestbook is listening at', port);

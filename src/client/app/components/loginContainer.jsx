@@ -9,6 +9,7 @@ import {signIn, populateProperties, populateBookings} from '../modules/actions';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import FbLogin from './login/fbLogin.jsx';
 
 const customContentStyle = {
   width: '75%',
@@ -25,29 +26,16 @@ class LoginContainer extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
   }
 
-  fbLogin() {
-    this.handleSignIn();
-    window.location = "https://www.facebook.com/v2.8/dialog/oauth?client_id=1736938369968580&redirect_uri=http://localhost:4000/properties";
-  }
-
   handleSignIn() {
-    let {dispatch} = this.props;
-    let user = {
+/*    let user = {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
-    }
-    // store user object within redux
-    dispatch(signIn(user));
-    // hydrates redux store with all of user's properties and bookings
-    // get allData for a specific user
-    axios.get('/allData')
-    .then(response => {
-      dispatch(populateProperties(response.data.properties));
-      dispatch(populateBookings(response.data.bookings));
-    })
-    .catch(err => {
-      console.error('Error fetching properties and bookings', err);
-    });
+    }*/
+    let user = {
+      email: 'test',
+      password: 'test'
+    };
+    this.props.dispatch(signIn(user));
     browserHistory.push('/properties');
     // socket.emit('hostLogIn', {hostId: 1});
   }
@@ -59,11 +47,7 @@ class LoginContainer extends React.Component {
         fullWidth={true}
         onTouchTap={() => this.handleSignIn()}
         id='loginButton'/>,
-      <RaisedButton
-        label='Login with Facebook'
-        backgroundColor='#3B5998'
-        fullWidth={true}
-        onTouchTap={() => this.fbLogin()} />
+      <FbLogin handleSignIn={() => this.handleSignIn()}/>
     ];
 
     return (
