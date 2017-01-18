@@ -5,17 +5,17 @@ import io from 'socket.io-client';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {deepOrange500} from 'material-ui/styles/colors';
-import {Card, CardHeader} from 'material-ui/Card';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import {blueGrey300, grey600} from 'material-ui/styles/colors';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import Paper from 'material-ui/Paper';
+import FontIcon from 'material-ui/FontIcon';
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import GraphIcon from 'material-ui/svg-icons/action/assessment';
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import LoginContainer from './loginContainer.jsx';
 import Logout from './logout/logout.jsx';
@@ -23,12 +23,15 @@ import Logout from './logout/logout.jsx';
 const socket = io();
 
 const muiTheme = getMuiTheme({
-  palette: { accent1Color: deepOrange500 }
+  palette: { accent1Color: blueGrey300}
 });
+
+// const homeIcon = <FontIcon className="material-icons">home</FontIcon>;
+// const graphIcon = <FontIcon className="material-icons">graph</FontIcon>;
+// const nearbyIcon = <IconLocationOn />;
 
 const homeIcon = <HomeIcon />;
 const graphIcon = <GraphIcon />;
-const settingsIcon = <SettingsIcon />;
 
 const style = {
   margin: 12,
@@ -36,15 +39,27 @@ const style = {
 
 const appStyle = {
   backgroundColor: 'white',
-  height: '10%',
-}
+  height: '8%',
+};
 
 const titleStyle ={
-  color: '#757575',
+  color: 'black',
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
   fontSize: '25px',
-  textTransform: 'lowercase'
-}
+  textTransform: 'lowercase',
+  marginLeft: '32%'
+};
+
+const navStyle = {
+  position: 'fixed', 
+  bottom: '0', 
+  zIndex: '10', 
+  textAlign: 'center',
+};
+
+const navLableStyle = {
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+};
 
 const mapStateToProps = function(store) {
   return {
@@ -57,6 +72,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       open: false,
+      selectedIndex: 0
     };
   }
 
@@ -77,6 +93,10 @@ class Main extends React.Component {
     });
   }
 
+  handleSelect(index) {
+    this.setState({selectedIndex: index});
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -86,28 +106,33 @@ class Main extends React.Component {
             titleStyle={titleStyle}
             style={appStyle}
             showMenuIconButton={false}
+            zDepth={0}
             iconElementRight={<Logout />}/>
-          <Tabs>
-            <Tab
-            label='MY PROPERTIES' value={0} icon={homeIcon}
-            containerElement={<Link to='/properties'></Link>}/>
-            <Tab
-            label='MY ANALYTICS' value={1} icon={graphIcon}
-            containerElement={<Link to='/analytics'></Link>}/>
-            <Tab
-            label='SETTINGS' value={2} icon={settingsIcon}
-            containerElement={<Link to='/settings'></Link>}/>
-          </Tabs>
+            <Paper zDepth={1}>
+              <BottomNavigation 
+                selectedIndex={this.state.selectedIndex}
+                style={navStyle}>
+                <BottomNavigationItem
+                  style={navLableStyle}
+                  label="my properties"
+                  icon={homeIcon}
+                  containerElement={<Link to='/properties' />}
+                  onTouchTap={() => this.handleSelect(0)}
+                />
+                <BottomNavigationItem
+                  style={navLableStyle}
+                  label="my analytics"
+                  icon={graphIcon}
+                  containerElement={<Link to='/analytics' />}
+                  onTouchTap={() => this.handleSelect(1)}
+                />
+              </BottomNavigation>
+            </Paper>
           <div className='container'>
             {this.props.children}
             <Link to='/map'>Map</Link>
             <Link to='/camera'>Camera</Link>
           </div>
-          <Snackbar
-            open={this.state.open}
-            message="A guest has checked into your property!"
-            autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose.bind(this)}/>
         </div>
       </MuiThemeProvider>
     );
