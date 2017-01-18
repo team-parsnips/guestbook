@@ -1,6 +1,5 @@
 import React from 'react';
 import QrReader from 'react-qr-reader'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const buttonStyle = {
@@ -8,7 +7,6 @@ const buttonStyle = {
   width: '100px',
   height: '44px',
   marginTop: '20%',
-  // backgroundColor: '#90A4AE'
 };
 
 const labelStyle = {
@@ -37,25 +35,24 @@ class CameraContainer extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <QrReader
-            handleError={this.props.handleError}
-            handleImageNotRecognized={this.props.handleError}
-            handleScan={this.props.handleScan}
-            legacyMode={true}
-            ref={(qrReader) => {this.qrReader = qrReader}}
-            maxImageSize={750} />
-          <RaisedButton 
-            backgroundColor='#90A4AE'
-            label="guest"
-            style={buttonStyle}
-            labelStyle={labelStyle}
-            onTouchTap={() => this.handleSubmit()}/>
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <RaisedButton 
+          backgroundColor='#B0BEC5'
+          label="guest"
+          style={buttonStyle}
+          labelStyle={labelStyle}
+          onTouchTap={() => this.handleSubmit()} />
+        <QrReader
+          handleError={this.props.handleError}
+          handleImageNotRecognized={this.props.handleError}
+          handleScan={this.props.handleScan}
+          legacyMode={true}
+          ref={(qrReader) => {this.qrReader = qrReader}}
+          maxImageSize={750} />
+      </div>
     )
   }
 }
+
 
 export default CameraContainer;

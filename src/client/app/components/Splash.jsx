@@ -34,7 +34,8 @@ const buttonStyle = {
   width: '100px',
   height: '44px',
   marginTop: '20%',
-  // backgroundColor: '#90A4AE'
+  // backgroundColor: 'rgba(144, 164, 174, 0.5)',
+  // opacity: '0.5'
 };
 
 const labelStyle = {
@@ -42,7 +43,9 @@ const labelStyle = {
   textAlign: 'center',
   color: 'white',
   fontFamily: 'Pacifico',
-  textTransform: 'lowercase'
+  textTransform: 'lowercase',
+  // color: 'rgba(0,0,0,1)'
+  // opacity: '1'
 };
 
 
@@ -91,7 +94,7 @@ class Splash extends React.Component {
           <div className='divTwo' 
           style={{display: 'inline-block', height: '55%', width: '100%', textAlign: 'center'}}>
             <RaisedButton 
-              backgroundColor='#90A4AE'
+              backgroundColor='#B0BEC5'
               label="host" 
               style={buttonStyle} 
               onTouchTap={() => this.handleLogin()}
@@ -100,19 +103,12 @@ class Splash extends React.Component {
             <CameraContainer 
               handleScan={(data) => this.handleScan(data)}
               handleError={(err) => this.handleError(err)}/>
-            <Link to='/camera'>
-              <RaisedButton 
-                backgroundColor='#90A4AE'
-                label="guest"
-                style={buttonStyle}
-                labelStyle={labelStyle} />
-            </Link>
+          </div>
             <Snackbar
               open={this.state.open}
               message={this.state.message}
               autoHideDuration={2000}
               onRequestClose={() => this.handleRequestClose()}/>
-          </div>
         </div>
       </MuiThemeProvider>
     );

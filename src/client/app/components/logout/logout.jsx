@@ -6,11 +6,10 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 const labelStyle = {
-  color: '#757575',
+  color: '#BDBDBD',
   fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
   fontSize: '18px',
-  textTransform: 'lowercase'
-  // marginBottom: '50%'
+  textTransform: 'lowercase',
 };
 
 class Logout extends React.Component {
@@ -30,6 +29,7 @@ class Logout extends React.Component {
   render() {
     return (
       <FlatButton
+        style={{marginTop: '7%'}}
         label='Logout'
         labelStyle={labelStyle}
         onTouchTap={() => this.handleLogOut()} />
