@@ -1,0 +1,50 @@
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  express: #name of the second service
+    build: 
+      context: ./server
+      dockerfile: Dockerfile # specify the directory of the Dockerfile
+    image: guestbook-server
+    container_name: guestbook-server-container
+    ports:
+      - "4000:4000" #specify ports forewarding
+    links:
+      - database:database
+    depends_on:
+      - database
+    volumes:
+      - ./client:/dock/client
+      - ./server:/dock/server
+      - wwwroot:/dock/client/public
+  
+  database:
+    image: mysql
+    container_name: guestbook-db-container
+    restart: always
+    volumes:
+      - wwwroot:/wwwroot
+    environment:
+      MYSQL_ROOT_PASSWORD: parsnips
+      MYSQL_DATABASE: database
+      MYSQL_USER: root
+      MYSQL_PASSWORD: parsnips
+    ports:
+      - "3306:3306"
+
+  webpack:
+    build:
+      context: ./client
+      dockerfile: dockerfile.webpack
+    image: guestbook-client
+    container_name: guestbook-client-container
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client:/dock/client
+      - wwwroot:/dock/client/public
+
+volumes:
+  wwwroot:
+    driver: local
