@@ -28,20 +28,16 @@ class FbLogin extends React.Component {
   }
 
   testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log(response);
-      console.log('Successful login for: ' + response.name);
+    FB.api('/me', {fields: 'email,first_name,last_name'}, (res) => {
+      console.log(res);
+      this.props.handleSignIn(res.email, res.id, res.first_name, res.last_name);
     });
   }
 
   statusChangeCallback(response) {
-
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
+    // Logged into your app and Facebook.
+    if (response.status === 'connected') {  
       this.testAPI();
-      this.props.handleSignIn();
-      //browserHistory.push('/properties');
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
     } else {

@@ -6,6 +6,7 @@ var propertyController = require('../controllers/propertyController.js');
 
 
 module.exports = function (app, express) {
+  app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(morgan('dev'));
 
