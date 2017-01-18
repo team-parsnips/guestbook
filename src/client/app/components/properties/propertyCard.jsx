@@ -21,7 +21,7 @@ const PropertyCard = (props) => {
       <CardText style={textStyle}>{props.property.name}</CardText>
       <CardText>{props.property.location}</CardText>
       <CardActions>
-        <RaisedButton label='Generate QR Code' onTouchTap={props.handleGenerateQR}/>
+        <RaisedButton label='Generate QR Code' onTouchTap={() => props.handleGenerateQR(props.property)}/>
       </CardActions>
     </Card>
   );
