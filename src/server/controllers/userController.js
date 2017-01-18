@@ -19,7 +19,6 @@ module.exports = {
   },
 
   fbLogin: function(req, res, next) {
-    console.log(req.body.email);
     db.User.findOne({where: {email: req.body.email}})
     .then(function(user) {
       // in case user doesn't exist, create it and return it
@@ -30,7 +29,7 @@ module.exports = {
           firstName: req.body.firstName,
           lastName: req.body.lastName
         })
-        .then((user) => {
+        .then(function(user) {
           res.send(user);
         })
       } else {
@@ -39,18 +38,22 @@ module.exports = {
       }
     })
     .catch(function(err) {
-      res.send({error: 'USERNAME', message: 'This email does not exist within our records.'})
+      console.log(err);
     })
   },
 
   register: function(req, res, next) {
+    console.log(req.body.email);
     db.User.create({
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.firstName,
       lastName: req.body.lastName
     }).then(function(user) {
-      res.sendStatus(201);
-    });
+      res.send({message: 'Registered new user.'});
+    })
+    .catch(function(err) {
+      res.send({message: 'Sorry, this user already exists.'})
+    })
   }
 }
