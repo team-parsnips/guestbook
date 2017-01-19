@@ -18,18 +18,13 @@ class PropertyList extends React.Component {
       <div className='propertyList'>
       {
         this.props.properties.map((property, i) => (
-          <SwipeableViews index={0} onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={property.id}>
-            <div>
-              <PropertyCard 
-                property={property} 
-                handleGenerateQR={this.props.handleGenerateQR}/>
-            </div>
-            <div>
-              <Card style={deleteStyle}>
-                <CardTitle title='DELETE DELETE DELETE' />
-              </Card>
-            </div>
-          </SwipeableViews>
+          <div>
+            <PropertyCard 
+              key={i}
+              property={property} 
+              handleGenerateQR={this.props.handleGenerateQR}
+              deleteProperty={this.props.deleteProperty}/>
+          </div>
         ))
       }
       </div>);
@@ -38,3 +33,5 @@ class PropertyList extends React.Component {
 
 export default PropertyList;
 
+// <SwipeableViews index={0} onChangeIndex={(index) => {index === 1 ? context.props.deleteProperty(property) : null}} key={property.id}>
+// </SwipeableViews>

@@ -7,7 +7,10 @@ import {populateProperties, populateBookings, deleteProperty} from '../../module
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
+import Add from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import PropertyList from './propertyList.jsx';
 import AddPropForm from './addPropForm.jsx';
@@ -15,11 +18,19 @@ import AddPropForm from './addPropForm.jsx';
 const cardStyle = {
   diplay: 'flex',
   'justifyContent': 'center',
-  'alignItem': 'center'
+  'alignItem': 'center',
+  position: 'sticky',
+  backgroundColor: '#B3E5FC'
 }
 
 const buttonStyle = {
-  margin: '0 auto'
+  margin: 0,
+  top: 'auto',
+  left: 17,
+  bottom: 20,
+  right: 'auto',
+  position: 'fixed',
+  zIndex: 10
 }
 
 const mapStateToProps = function(store) {
@@ -96,21 +107,26 @@ class PropertiesContainer extends React.Component {
           onRequestClose={() => this.handleClose()}>
           <img id='map'></img>
         </Dialog>
-
         <PropertyList 
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
           handleGenerateQR={(property) => this.handleGenerateQR(property)}/>
-        <Card
-          onTouchTap={()=> {this.openHandler()}}
-          style={cardStyle}
-        >
-          <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
-        </Card>
+        <FloatingActionButton 
+        onTouchTap={()=> {this.openHandler()}}
+        style={buttonStyle}>
+          <ContentAdd />
+        </FloatingActionButton>
         <AddPropForm openHandler={this.openHandler} open={this.state.addProp}/>
       </div>
     );
   }
 };
 
+
 export default connect(mapStateToProps)(PropertiesContainer);
+        // <Card
+        //   onTouchTap={()=> {this.openHandler()}}
+        //   style={cardStyle}
+        // >
+        //   <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
+        // </Card>

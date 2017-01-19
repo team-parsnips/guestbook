@@ -1,40 +1,46 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-
+// import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
-// const cardStyle = ;
-    // marginBottom: '50px'
+import ActionAspectRatio from 'material-ui/svg-icons/action/aspect-ratio';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+import EditorAttachMoney from 'material-ui/svg-icons/editor/attach-money';
+
+const cardStyle = {
+  width: '90%',
+  height: '300px',
+  marginLeft: '5%',
+  overflow: 'hidden',
+  position: 'relative',
+  display: 'inline-block',
+};
+
 const textStyle = {
-  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
-  fontSize: '20px',
+  fontSize: '14px',
   marginLeft: '10%', 
-  color: '#757575'
+  color: '#616161',
+  position: 'absolute',
+  bottom: 0,
+  backgroundColor: 'white', 
 };
 
 const PropertyCard = (props) => {
   return (
-    <Card zDepth={1}>
-      <CardMedia style={{height: '200px', width: '90%', margin: '0 auto', marginTop: '50px',
-      background: 'url("' + props.property.photo + '") no-repeat center',
-      backgroundSize: 'cover'}}></CardMedia>
-      <CardText style={textStyle}>{props.property.name}</CardText>
-      <CardText>{props.property.location}</CardText>
+    <Card style={cardStyle} zDepth={2}>
+      <CardMedia style={{background: 'url(' + props.property.photo + ') no-repeat center',
+      backgroundSize: 'cover', width: '100%', height: '100%', position: 'absolute'}}>
+      </CardMedia>
+      <CardText style={textStyle}>
+        {props.property.name} | {props.property.location}
+      </CardText>
       <CardActions>
-        <RaisedButton label='Generate QR Code' onTouchTap={() => props.handleGenerateQR(props.property)}/>
+        <ActionDelete color="white" onTouchTap={props.deleteProperty.bind(this)} />
+        <ActionAspectRatio color="white" />
+        <EditorAttachMoney color="white" /> 
       </CardActions>
     </Card>
   );
 }
 
 export default PropertyCard;
-
-
-      // <CardMedia>
-        // <img src={props.property.photo} />
-      // </CardMedia>
-      // <CardHeader
-      //   title={props.property.name} 
-      //   subtitle={props.property.address}
-      //   actAsExpander={true}
-      //   showExpandableButton={true} />
