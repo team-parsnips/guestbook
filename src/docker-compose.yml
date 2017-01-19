@@ -14,6 +14,7 @@ services:
       - database:database
     depends_on:
       - database
+      - python
     volumes:
       - ./client:/dock/client
       - ./server:/dock/server
@@ -32,6 +33,8 @@ services:
       MYSQL_PASSWORD: parsnips
     ports:
       - "3306:3306"
+    depends_on:
+      - python
 
   webpack:
     build:
@@ -44,6 +47,17 @@ services:
     volumes:
       - ./client:/dock/client
       - wwwroot:/dock/client/public
+    depends_on:
+      - python
+  
+  python:
+    build:
+      context: ./prediction-service/airbnbscrape
+      dockerfile: Dockerfile
+    image: prediction-service
+    container_name: prediction-service-container
+    ports:
+      - "5000:5000"
 
 volumes:
   wwwroot:
