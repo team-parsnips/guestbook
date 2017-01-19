@@ -45,9 +45,9 @@ io.on('connection', function (socket) {
     socket.join('hosts');
   });
 
-  socket.on('checkIn', function () {
+  socket.on('check in', function (data) {
     console.log('got guest check in')
-    socket.broadcast.emit('user checked in');  
+    socket.broadcast.emit('guest checked in', {propertyName: data.propertyName});  
     // io.to('hosts').emit('user checked in')
   });
 
