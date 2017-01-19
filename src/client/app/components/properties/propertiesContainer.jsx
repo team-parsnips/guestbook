@@ -124,9 +124,3 @@ class PropertiesContainer extends React.Component {
 
 
 export default connect(mapStateToProps)(PropertiesContainer);
-        // <Card
-        //   onTouchTap={()=> {this.openHandler()}}
-        //   style={cardStyle}
-        // >
-        //   <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
-        // </Card>

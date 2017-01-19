@@ -1,5 +1,5 @@
 import React from 'react';
-// import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
@@ -35,9 +35,15 @@ const PropertyCard = (props) => {
         {props.property.name} | {props.property.location}
       </CardText>
       <CardActions>
-        <ActionDelete color="white" onTouchTap={props.deleteProperty.bind(this)} />
-        <ActionAspectRatio color="white" />
-        <EditorAttachMoney color="white" /> 
+        <IconButton onTouchTap={props.deleteProperty}>
+          <ActionDelete color="white" />
+        </IconButton>
+        <IconButton onTouchTap={props.handleGenerateQR}>
+          <ActionAspectRatio color="white" />
+        </IconButton>
+        <IconButton>
+          <EditorAttachMoney color="white" /> 
+        </IconButton>
       </CardActions>
     </Card>
   );
