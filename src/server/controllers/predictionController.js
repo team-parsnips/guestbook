@@ -8,7 +8,7 @@ module.exports = {
     console.log('personCapacity', personCap);
     axios({
       method: 'post',
-      url: 'http://localhost:5000',
+      url: '172.20.0.2:5000',
       timeout: 600000,
       data: {
         location: airbnbAdd,
