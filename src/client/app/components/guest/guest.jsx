@@ -89,7 +89,7 @@ class Guest extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={divStyle}>
           <div style={{display: 'inline-block', height: '70%', width: '100%', 
-          background: 'url("https://s-media-cache-ak0.pinimg.com/564x/ea/5c/66/ea5c66e6c551fcdf4669523ba83a62df.jpg") no-repeat center',
+          background: 'url("' + this.state.propertyPic + '") no-repeat center',
           backgroundSize: 'cover'}}> 
           </div> 
           <div className="div2" style={textStyle}>
