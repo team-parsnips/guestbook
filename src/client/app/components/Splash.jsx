@@ -33,7 +33,7 @@ const buttonStyle = {
   margin: 12,
   width: '100px',
   height: '44px',
-  marginTop: '20%',
+  marginTop: '10%',
 };
 
 const labelStyle = {
@@ -89,7 +89,7 @@ class Splash extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={divStyle}>
-          <div className='divOne' style={{display: 'inline-block', height: '55%', width: '100%', marginTop: '40%'}}>
+          <div className='divOne' style={{display: 'inline-block', height: '23%', width: '100%', marginTop: '40%'}}>
             <p style={{fontFamily: 'Pacifico', fontSize: '60px', textAlign: 'center', color: 'white'}}>guestbook</p>
           </div>
           <div className='divTwo' 
