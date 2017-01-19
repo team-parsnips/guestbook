@@ -11,6 +11,7 @@ var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
 var bookingRouter = require('./routers/bookingRouter.js');
 var qrCodeRouter = require('./routers/qrCodeRouter.js');
+var predictionRouter = require('./routers/predictionRouter');
 
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
@@ -23,10 +24,11 @@ app.use('/', userRouter);
 app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
 app.use('/qrCode', qrCodeRouter);
+app.use('/predict', predictionRouter);
 
-app.get('/auth', function(req, res) {
+/*app.get('/auth', function(req, res) {
   res.send(token);
-});
+});*/
 
 // general redirect for full client side rendering of pages
 app.get('/*', function(req, res) {
