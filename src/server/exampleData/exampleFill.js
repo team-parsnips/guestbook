@@ -1,3 +1,6 @@
+module.exports = function() {
+
+
 var db = require('../db');
 var Promise = require("bluebird");
 var exampleUsers = require('./exampleUsers.js');
@@ -98,3 +101,4 @@ function addBookings2() {
     }, Promise.resolve())
   });
 }
+};
