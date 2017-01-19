@@ -2,7 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {signOut} from '../../modules/actions';
-import FlatButton from 'material-ui/FlatButton';
+// import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+
+
+import LockOutline from 'material-ui/svg-icons/action/lock-outline';
 
 
 const labelStyle = {
@@ -28,11 +32,11 @@ class Logout extends React.Component {
 
   render() {
     return (
-      <FlatButton
-        style={{marginTop: '7%'}}
-        label='Logout'
-        labelStyle={labelStyle}
-        onTouchTap={() => this.handleLogOut()} />
+      <IconButton
+        onTouchTap={() => this.handleLogOut()}
+      >     
+        <LockOutline color="#757575"/>
+      </IconButton>
     )
   }
 }

@@ -2,6 +2,14 @@ import React from 'react';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
+
+const labelStyle = {
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
+  fontSize: '16px',
+  textTransform: 'capitalize',
+  color: 'white'
+};
+
 class FbLogin extends React.Component { 
   constructor() {
     super();
@@ -60,6 +68,7 @@ class FbLogin extends React.Component {
     return (
       <RaisedButton
         label='Login with Facebook'
+        labelStyle={labelStyle}
         backgroundColor='#3B5998'
         fullWidth={true}
         onTouchTap={() => this.handleClick()} />

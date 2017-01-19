@@ -15,7 +15,7 @@ const divStyle = {
   position: 'relative',
   width: '100%',
   height: '100%',
-  backgroundImage: 'url("/unsplash2.jpg")',
+  backgroundImage: 'url("image/unsplash2.jpg")',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   flexDirection: 'column',
@@ -94,7 +94,7 @@ class Splash extends React.Component {
       <MuiThemeProvider>
         <div style={divStyle}>
           <div className='divOne' style={{display: 'inline-block', height: '55%', width: '100%'}}>
-            <img src='/guestbook3.png' style={logoStyle} />
+            <img src='image/guestbook3.png' style={logoStyle} />
           </div>
           <div className='divTwo' 
           style={{display: 'inline-block', height: '55%', width: '100%', textAlign: 'center'}}>
