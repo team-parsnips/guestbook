@@ -42,7 +42,8 @@ const appStyle = {
 
 const titleStyle ={
   color: 'black',
-  fontSize: '25px',
+  fontFamily: 'Pacifico',
+  fontSize: '30px',
   marginLeft: '30%',
   textTransform: 'lowercase',
 };
@@ -70,7 +71,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     socket.emit('hostLogin', {hostId: 1});
-    socket.on('user checked in', () => this.handleGuestCheckIn());
+    socket.on('guest checked in', () => this.handleGuestCheckIn());
   }
 
   handleRequestClose() {
@@ -120,6 +121,12 @@ class Main extends React.Component {
           <div className='container'>
             {this.props.children}  
           </div>
+          <Snackbar
+            open={this.state.open}
+            message={"A guest has checked into "}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
         </div>
       </MuiThemeProvider>
     );
@@ -129,4 +136,3 @@ class Main extends React.Component {
           
 export default connect(mapStateToProps)(Main);
 
-// <Link to='/map'>Map</Link>

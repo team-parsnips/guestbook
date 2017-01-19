@@ -13,6 +13,7 @@ module.exports = {
       UserId: req.body.UserId,
       name: req.body.name,
       location: req.body.location,
+      price: req.body.price,
       checkInTime: req.body.checkInTime,
       checkOutTime: req.body.checkOutTime
     }).then(function(property) {

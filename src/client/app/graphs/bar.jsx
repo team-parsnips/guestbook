@@ -125,18 +125,27 @@ class StackedGroupedBar extends React.Component {
   componentDidMount() {
     var svg, g, x, y, color, series, rect, timeout, data = this.state.dataSet;
 
-       svg = d3.select('.stackedgrouped');
+    var width = this.props.width;
+    var height = this.props.height;
+    var innerWidth = this.props.width - margin.left - margin.right;
+    var innerHeight = this.props.height - margin.top - margin.bottom;
+
+    this.setState({width: width, height:height, innerWidth: innerWidth, innerHeight: innerHeight});
+
+       svg = d3.select('.stackedgrouped').append('svg')
+              .attr('width', width)
+              .attr('height', height);
          g = svg.append('g')
               .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-         x = d3.scaleBand().domain(d3.range(data.m)).rangeRound([0, this.state.innerWidth]).padding(0.08);
-         y = d3.scaleLinear().domain([0, data.y1Max]).range([this.state.innerHeight, 0]);
+         x = d3.scaleBand().domain(d3.range(data.m)).rangeRound([0, innerWidth]).padding(0.08);
+         y = d3.scaleLinear().domain([0, data.y1Max]).range([innerHeight, 0]);
      color = d3.scaleOrdinal().domain(d3.range(data.n)).range(d3.schemeCategory20c);
     series = g.selectAll('.series').data(data.y01z).enter().append('g')
               .attr('fill', (d, i) => color(i))
               .attr('id', d => d.index);
       rect = series.selectAll('rect').data(d => d).enter().append('rect')
               .attr('x', (d, i) => x(i))
-              .attr('y', this.state.innerHeight)
+              .attr('y', innerHeight)
               .attr('width', x.bandwidth())
               .attr('height', 0);
 
@@ -145,7 +154,7 @@ class StackedGroupedBar extends React.Component {
       .attr('height', d => y(d[0]) - y(d[1]));
 
     g.append('g').attr('class', 'axis axis--x')
-      .attr('transform', 'translate(0,' + this.state.innerHeight + ')')
+      .attr('transform', 'translate(0,' + innerHeight + ')')
     .call(d3.axisBottom(x).tickSize(1).tickPadding(6).tickFormat(d => data.xz[d]));
 
     d3.selectAll('input').on('change', changed);
@@ -217,17 +226,18 @@ class StackedGroupedBar extends React.Component {
   }
 
   render() {
+    if (this.props.height !== this.state.height || this.props.width !== this.state.width) {
+      var s = d3.select('.stackedgrouped').select('svg');
+      s.remove();
+      this.componentDidMount();
+    }
     return (
       <div>
         <form>
           <label><input type='radio' name='mode' value='grouped'/>Grouped</label>
           <label><input type='radio' name='mode' value='stacked' defaultChecked/>Stacked</label>
         </form>
-        <svg
-        className='stackedgrouped'
-        width={this.state.width}
-        height={this.state.height}>
-        </svg>
+        <div className='stackedgrouped'></div>
       </div>
     );
   }

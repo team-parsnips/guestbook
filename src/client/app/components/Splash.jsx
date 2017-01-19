@@ -33,9 +33,7 @@ const buttonStyle = {
   margin: 12,
   width: '100px',
   height: '44px',
-  marginTop: '20%',
-  // backgroundColor: 'rgba(144, 164, 174, 0.5)',
-  // opacity: '0.5'
+  marginTop: '10%',
 };
 
 const labelStyle = {
@@ -44,8 +42,6 @@ const labelStyle = {
   color: 'white',
   fontFamily: 'Pacifico',
   textTransform: 'lowercase',
-  // color: 'rgba(0,0,0,1)'
-  // opacity: '1'
 };
 
 
@@ -93,11 +89,11 @@ class Splash extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={divStyle}>
-          <div className='divOne' style={{display: 'inline-block', height: '55%', width: '100%'}}>
-            <img src='image/guestbook3.png' style={logoStyle} />
+          <div className='divOne' style={{display: 'inline-block', height: '23%', width: '100%', marginTop: '40%'}}>
+            <p style={{fontFamily: 'Pacifico', fontSize: '60px', textAlign: 'center', color: 'white'}}>guestbook</p>
           </div>
           <div className='divTwo' 
-          style={{display: 'inline-block', height: '55%', width: '100%', textAlign: 'center'}}>
+          style={{display: 'inline-block', height: '70%', width: '100%', textAlign: 'center'}}>
             <RaisedButton 
               backgroundColor='#B0BEC5'
               label="host" 
@@ -122,3 +118,5 @@ class Splash extends React.Component {
 
 
 export default Splash;
+
+            // <img src='image/guestbook3.png' style={logoStyle} />

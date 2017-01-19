@@ -23,11 +23,7 @@ class Logout extends React.Component {
 
   handleLogOut() {
     this.props.dispatch(signOut());
-    this.props.router.push('/');
-    // check if logged into FB
-    FB.logout((res) => {
-      browserHistory.push('/');
-    });
+    browserHistory.push('/');
   }
 
   render() {

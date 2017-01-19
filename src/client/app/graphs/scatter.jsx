@@ -7,8 +7,8 @@ class ScatterPlot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 960,
-      height: 500,
+      width: this.props.width || 250,
+      height: this.props.height || 300,
       options: {
         // styles here!
       }
@@ -17,9 +17,11 @@ class ScatterPlot extends React.Component {
 
   componentDidMount() {
     var margin = {top: 20, right: 20, bottom: 70, left: 50};
-    var width = this.state.width;
-    var height = this.state.height;
+    var width = this.props.width;
+    var height = this.props.height;
 
+    this.setState({width: width, height: height});
+    
     var svg = d3.select(".scatter-plot").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -101,6 +103,11 @@ class ScatterPlot extends React.Component {
   }
 
   render() {
+    if (this.props.height !== this.state.height || this.props.width !== this.state.width) {
+      var s = d3.select(".scatter-plot").select('svg');
+      s.remove();
+      this.componentDidMount();
+    }
     return (
       <div className="scatter-plot"></div>
     );

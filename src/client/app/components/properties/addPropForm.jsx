@@ -26,16 +26,13 @@ class AddPropForm extends React.Component {
     property = {
       name: this.refs.name.getValue(),
       location: this.refs.location.getValue(),
+      price: this.refs.price.getValue(),
       checkInTime: '3pm',
       checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
     url = '/property/';
-    axios.post(url, {name: property.name,
-      location: property.location,
-      checkInTime: '3pm',
-      checkOutTime: '11am'      
-    })
+    axios.post(url, property)
     .then(res => {
       dispatch(addProperty(property));  
     })
@@ -63,6 +60,11 @@ class AddPropForm extends React.Component {
           <TextField
           ref='location'
           hintText='Location'
+          fullWidth={true}
+          /><br />
+          <TextField
+          ref='price'
+          hintText='Price'
           fullWidth={true}
           /><br />
           <RaisedButton

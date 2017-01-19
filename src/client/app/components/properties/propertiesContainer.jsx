@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import axios from 'axios';
 
 import {connect} from 'react-redux';
@@ -6,11 +7,19 @@ import {populateProperties, populateBookings, deleteProperty} from '../../module
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
-import AddIcon from 'material-ui/svg-icons/content/add-circle';
-import Add from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import AddIcon from 'material-ui/svg-icons/content/add-circle';
+import MapsMap from 'material-ui/svg-icons/maps/map';
+import ContentClear from 'material-ui/svg-icons/content/clear'
+
+import { Menu, MainButton, ChildButton } from 'react-mfb'
+// import 'react-mfb/mfb.css'
+// import '../styles/ionicons.min.css'; //(downloaded from the ionicons.com website and then put it manually into my project)
+
 
 import PropertyList from './propertyList.jsx';
 import AddPropForm from './addPropForm.jsx';
@@ -23,15 +32,18 @@ const cardStyle = {
   backgroundColor: '#B3E5FC'
 }
 
-const buttonStyle = {
+const addStyle = {
   margin: 0,
   top: 'auto',
-  left: 17,
+  left: 20,
   bottom: 20,
   right: 'auto',
   position: 'fixed',
   zIndex: 10
-}
+};
+
+const mapStyle = Object.assign({}, addStyle);
+mapStyle.bottom = 80;
 
 const mapStateToProps = function(store) {
   return {
@@ -91,11 +103,20 @@ class PropertiesContainer extends React.Component {
   }
 
   render() {
+
+    var panel = document.getElementById('panel'),
+    showcode = document.getElementById('showcode'),
+    selectFx = document.getElementById('selections-fx'),
+    selectPos = document.getElementById('selections-pos'),
+    selectMethod = document.getElementById('selections-method');
+    var effect = 'zoomin',
+    pos = 'br',
+    method = 'hover';
+
     const actions = [
-      <RaisedButton
-        label="Close"
-        primary={true}
-        onTouchTap={() => this.handleClose()}/>
+      <IconButton onTouchTap={() => this.handleClose()}>
+        <ContentClear />
+      </IconButton>
     ];
     return (
       <div>
@@ -111,11 +132,17 @@ class PropertiesContainer extends React.Component {
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
           handleGenerateQR={(property) => this.handleGenerateQR(property)}/>
-        <FloatingActionButton 
-        onTouchTap={()=> {this.openHandler()}}
-        style={buttonStyle}>
-          <ContentAdd />
-        </FloatingActionButton>
+          <FloatingActionButton 
+            onTouchTap={()=> {this.openHandler()}}
+            style={addStyle}>
+            <ContentAdd />
+          </FloatingActionButton>
+          <Link to="/map">
+            <FloatingActionButton style={mapStyle}>
+              <MapsMap />
+            </FloatingActionButton>
+          </Link>
+
         <AddPropForm openHandler={this.openHandler} open={this.state.addProp}/>
       </div>
     );
@@ -124,9 +151,3 @@ class PropertiesContainer extends React.Component {
 
 
 export default connect(mapStateToProps)(PropertiesContainer);
-        // <Card
-        //   onTouchTap={()=> {this.openHandler()}}
-        //   style={cardStyle}
-        // >
-        //   <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
-        // </Card>

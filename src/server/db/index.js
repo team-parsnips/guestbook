@@ -29,6 +29,8 @@ var User = db.define('User', {
 var Property = db.define('Property', {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
+  price: Sequelize.FLOAT,
+  predictedPrice: Sequelize.FLOAT,
   checkInTime: Sequelize.STRING,
   checkOutTime: Sequelize.STRING,
   photo: Sequelize.TEXT

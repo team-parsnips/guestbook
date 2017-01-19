@@ -7,6 +7,8 @@ import io from 'socket.io-client';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const socket = io();
+
 const muiTheme = getMuiTheme({
   palette: { accent1Color: '#E0F2F1' }
 });
@@ -28,13 +30,9 @@ const textStyle = {
   color: '#757575'
 };
 
-const socket = io();
-
 const mapStateToProps = function(store) {
   return {
-    // checkedIn: store.bookingState.checkedIn,
     propertyName: store.propertyState.name,
-    // property: store.propertyState.name
   };
 }
 
@@ -59,29 +57,8 @@ class Guest extends React.Component {
         propertyName: res.data.name,
         propertyPic: res.data.photo,
       });
-
+      socket.emit('guest checked in', {propertyName: res.data.name});
     });
-  }
-
-  handleCheckIn() {
-    let {dispatch} = this.props;
-
-    axios.put('/booking/1', {checkInTime: new Date()})
-      .then((response) => {
-        dispatch(checkIn(response.data));
-        var propertyId = response.data.PropertyId;
-        axios.get('/property/' + propertyId)
-          .then((property) => {
-            var userId = property.data.UserId;
-            this.setState({hostId: userId});
-          })
-      })
-      .catch(err => {
-        console.error('Error updating booking with check-in time', err);
-      });
-
-    // socket.emit('checkIn', {hostId: this.state.hostId});
-    socket.emit('checkIn');
   }
 
   render() {
@@ -104,3 +81,24 @@ class Guest extends React.Component {
 
 
 export default connect(mapStateToProps)(Guest);
+
+
+
+  // handleCheckIn() {
+  //   let {dispatch} = this.props;
+
+  //   axios.put('/booking/1', {checkInTime: new Date()})
+  //     .then((response) => {
+  //       dispatch(checkIn(response.data));
+  //       var propertyId = response.data.PropertyId;
+  //       axios.get('/property/' + propertyId)
+  //         .then((property) => {
+  //           var userId = property.data.UserId;
+  //           this.setState({hostId: userId});
+  //         })
+  //     })
+  //     .catch(err => {
+  //       console.error('Error updating booking with check-in time', err);
+  //     });
+  //   socket.emit('checkIn');
+  // }
