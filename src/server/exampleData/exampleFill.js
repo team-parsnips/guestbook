@@ -10,6 +10,17 @@ var exampleBookings2 = require('./exampleBookings2.js');
 
 // begins chained functions to add users, properties, and bookings
 var propertyId = 0;
+// db.User.findAll()
+// .then(function(users) {
+//   console.log(users);
+//   if (users.length < 1) {
+//     addUsers();
+//   }
+// })
+// .catch(function(err) {
+//   console.err('Error checking DB to determine if self-population needed');
+// });
+
 addUsers();
 
 // add all users

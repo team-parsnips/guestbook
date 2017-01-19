@@ -14,6 +14,7 @@ services:
       - database:database
     depends_on:
       - database
+      - python
     volumes:
       - ./client:/dock/client
       - ./server:/dock/server
@@ -48,7 +49,7 @@ services:
       - ./client:/dock/client
       - wwwroot:/dock/client/public
     depends_on:
-      - python
+      - database
   
   python:
     build:
