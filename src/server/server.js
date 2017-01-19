@@ -6,6 +6,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var axios = require('axios');
 
+var dbFill = require('./exampleData/exampleFill')();
+
 // var socketHandler = require('./socketHandler.js');
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
