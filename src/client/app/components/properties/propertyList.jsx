@@ -18,9 +18,8 @@ class PropertyList extends React.Component {
       <div className='propertyList'>
       {
         this.props.properties.map((property, i) => (
-          <div>
+          <div key={i}>
             <PropertyCard 
-              key={i}
               property={property} 
               handleGenerateQR={this.props.handleGenerateQR}
               deleteProperty={this.props.deleteProperty}/>
