@@ -1,9 +1,20 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('guestbook', 'root', '', {
-/*  host: 'localhost',
-  host: '0.0.0.0',
-  port: '3306'*/
+
+// To run in docker container/production mode - uncomment below
+// Ensure mysql is NOT running (mysql.server stop)
+// Run with 'docker-compose up' command in src directory
+
+var db = new Sequelize('database', 'root', 'parsnips', {
+  host: 'database',
+  port: '3306'
 });
+
+// To run locally/development mode - uncomment below
+// Ensure mysql is running (mysql.server start)
+// Create 'guestbook' database
+/*
+var db = new Sequelize('guestbook', 'root', '');
+*/
 
 var User = db.define('User', {
   email: {
