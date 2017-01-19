@@ -35,10 +35,10 @@ const PropertyCard = (props) => {
         {props.property.name} | {props.property.location}
       </CardText>
       <CardActions>
-        <IconButton onTouchTap={props.deleteProperty}>
+        <IconButton onTouchTap={() => props.deleteProperty(props.property)}>
           <ActionDelete color="white" />
         </IconButton>
-        <IconButton onTouchTap={props.handleGenerateQR}>
+        <IconButton onTouchTap={() => props.handleGenerateQR(props.property)}>
           <ActionAspectRatio color="white" />
         </IconButton>
         <IconButton>

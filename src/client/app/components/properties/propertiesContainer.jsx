@@ -6,11 +6,12 @@ import {populateProperties, populateBookings, deleteProperty} from '../../module
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Dialog from 'material-ui/Dialog';
-import AddIcon from 'material-ui/svg-icons/content/add-circle';
-import Add from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import AddIcon from 'material-ui/svg-icons/content/add-circle';
+import ContentClear from 'material-ui/svg-icons/content/clear'
 
 import PropertyList from './propertyList.jsx';
 import AddPropForm from './addPropForm.jsx';
