@@ -17,6 +17,11 @@ const labelStyle = {
   textTransform: 'lowercase'
 };
 
+const cameraDiv = {
+  width: '100px',
+  display: 'inline-block'
+}
+
 class CameraContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +40,7 @@ class CameraContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={cameraDiv}>
         <RaisedButton 
           backgroundColor='#B0BEC5'
           label="guest"
