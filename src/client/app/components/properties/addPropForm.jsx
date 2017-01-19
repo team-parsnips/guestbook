@@ -79,3 +79,10 @@ class AddPropForm extends React.Component {
 };
 
 export default connect(mapStateToProps)(AddPropForm);
+
+
+    // {name: property.name,
+    //   location: property.location,
+    //   checkInTime: '3pm',
+    //   checkOutTime: '11am'      
+    // }
