@@ -15,6 +15,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import GraphIcon from 'material-ui/svg-icons/action/assessment';
+import Add from 'material-ui/svg-icons/content/add';
 
 
 import LoginContainer from './loginContainer.jsx';
@@ -23,42 +24,33 @@ import Logout from './logout/logout.jsx';
 const socket = io();
 
 const muiTheme = getMuiTheme({
-  palette: { accent1Color: deepOrange500 }
+  palette: {
+    accent1Color: deepOrange500,
+    primary1Color: '#90A4AE',
+  },
+  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
 });
-
-// const homeIcon = <FontIcon className="material-icons">home</FontIcon>;
-// const graphIcon = <FontIcon className="material-icons">graph</FontIcon>;
-// const nearbyIcon = <IconLocationOn />;
 
 const homeIcon = <HomeIcon />;
 const graphIcon = <GraphIcon />;
 
-const style = {
-  margin: 12,
-};
-
 const appStyle = {
   backgroundColor: 'white',
-  height: '8%',
+  height: '9%',
+  position: 'sticky',
 };
 
 const titleStyle ={
   color: 'black',
-  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif',
   fontSize: '25px',
+  marginLeft: '30%',
   textTransform: 'lowercase',
-  // marginLeft: '32%'
 };
 
 const navStyle = {
-  position: 'fixed', 
-  bottom: '0', 
-  zIndex: '10', 
+  height: '9%',
+  width: '100%',
   textAlign: 'center',
-};
-
-const navLableStyle = {
-  fontFamily: 'Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
 };
 
 const mapStateToProps = function(store) {
@@ -108,30 +100,25 @@ class Main extends React.Component {
             showMenuIconButton={false}
             zDepth={0}
             iconElementRight={<Logout />}/>
-            <Paper zDepth={1}>
-              <BottomNavigation 
-                selectedIndex={this.state.selectedIndex}
-                style={navStyle}>
-                <BottomNavigationItem
-                  style={navLableStyle}
-                  label="my properties"
-                  icon={homeIcon}
-                  containerElement={<Link to='/properties' />}
-                  onTouchTap={() => this.handleSelect(0)}
-                />
-                <BottomNavigationItem
-                  style={navLableStyle}
-                  label="my analytics"
-                  icon={graphIcon}
-                  containerElement={<Link to='/analytics' />}
-                  onTouchTap={() => this.handleSelect(1)}
-                />
-              </BottomNavigation>
-            </Paper>
+          <Paper zDepth={0} style={navStyle}>
+            <BottomNavigation 
+              selectedIndex={this.state.selectedIndex}>
+              <BottomNavigationItem
+                label="my properties"
+                icon={homeIcon}
+                containerElement={<Link to='/properties' />}
+                onTouchTap={() => this.handleSelect(0)}
+              />
+              <BottomNavigationItem
+                label="my analytics"
+                icon={graphIcon}
+                containerElement={<Link to='/analytics' />}
+                onTouchTap={() => this.handleSelect(1)}
+              />
+            </BottomNavigation>
+          </Paper>
           <div className='container'>
-            {this.props.children}
-            <Link to='/map'>Map</Link>
-            <Link to='/camera'>Camera</Link>
+            {this.props.children}  
           </div>
         </div>
       </MuiThemeProvider>
@@ -139,4 +126,7 @@ class Main extends React.Component {
   }
 }
 
+          
 export default connect(mapStateToProps)(Main);
+
+// <Link to='/map'>Map</Link>
