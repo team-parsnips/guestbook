@@ -7,8 +7,8 @@ class ScatterPlot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 960,
-      height: 500,
+      width: 250,
+      height: 300,
       options: {
         // styles here!
       }
