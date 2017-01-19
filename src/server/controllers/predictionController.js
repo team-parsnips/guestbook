@@ -4,7 +4,7 @@ module.exports = {
   predictPrice: function(req, res, next) {
     axios({
       method: 'post',
-      url: 'http://localhost:5000',
+      url: '172.20.0.2:5000',
       timeout: 600000,
       data: {
         location: 'irvine',
