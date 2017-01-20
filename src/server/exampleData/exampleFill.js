@@ -90,7 +90,6 @@ function addBookings() {
         days: booking.days,
         pricePaid: booking.pricePaid,
         rating: booking.rating,
-        PropertyId: propertyId
         });
       });
     }, Promise.resolve())
