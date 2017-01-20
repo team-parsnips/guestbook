@@ -2,7 +2,7 @@ var db = require('../db');
 
 module.exports = {
   getProperty: function(req, res, next) {
-    db.Property.findOne({id: req.params.id}) //TODO: change id to propertyId to match schema
+    db.Property.findOne({where: {id: req.params.id}}) //TODO: change id to propertyId to match schema
     .then(function(property) {
       res.send(property);
     });
@@ -13,10 +13,14 @@ module.exports = {
       UserId: req.body.UserId,
       name: req.body.name,
       location: req.body.location,
+      price: req.body.price,
+      predictedPrice: null,
+      photo: req.body.photo,
+      personCapacity: req.body.personCapacity,
       checkInTime: req.body.checkInTime,
       checkOutTime: req.body.checkOutTime
     }).then(function(property) {
-      res.sendStatus(201);
+      res.send(property);
     });
   },
 

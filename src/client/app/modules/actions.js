@@ -6,10 +6,24 @@ export const signIn = (user) => {
   }
 }
 
+export const signOut = () => {
+  return {
+    type: 'USER_SIGNOUT',
+  }
+}
+
 export const addProperty = (property) => {
   return {
     type: 'ADD_PROPERTY',
     property
+  }
+}
+
+export const addPredictPrice = (property, predictPrice) => {
+  return {
+    type: 'ADD_PREDICT_PRICE',
+    property,
+    predictPrice
   }
 }
 
@@ -31,5 +45,12 @@ export const populateBookings = (bookings) => {
   return {
     type: 'POPULATE_BOOKINGS',
     bookings
+  }
+}
+
+export const checkIn = (booking) => {
+  return {
+    type: 'GUEST_CHECKIN', 
+    booking
   }
 }

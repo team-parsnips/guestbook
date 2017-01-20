@@ -1,9 +1,25 @@
 import React from 'react';
 import QrReader from 'react-qr-reader'
+import RaisedButton from 'material-ui/RaisedButton';
 
-const previewStyle = {
-  height: '240px',
-  width: '320px',
+const buttonStyle = {
+  margin: 12,
+  width: '100px',
+  height: '44px',
+  marginTop: '20%',
+};
+
+const labelStyle = {
+  fontSize: '24px',
+  textAlign: 'center',
+  color: 'white',
+  fontFamily: 'Pacifico',
+  textTransform: 'lowercase'
+};
+
+const cameraDiv = {
+  width: '100px',
+  display: 'inline-block'
 }
 
 class CameraContainer extends React.Component {
@@ -12,16 +28,6 @@ class CameraContainer extends React.Component {
     this.state = {
       result: 'No result',
     }
-  }
-
-  handleScan(data){
-    this.setState({
-      result: data,
-    });
-    // redirect to read url after 1 sec.
-    setTimeout(function() {
-      window.location.href = data;
-    }, 1000);
   }
 
   handleError(err){
@@ -34,19 +40,24 @@ class CameraContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={cameraDiv}>
+        <RaisedButton 
+          backgroundColor='#B0BEC5'
+          label="guest"
+          style={buttonStyle}
+          labelStyle={labelStyle}
+          onTouchTap={() => this.handleSubmit()} />
         <QrReader
-          previewStyle={previewStyle}
-          handleError={this.handleError}
-          handleScan={this.handleScan.bind(this)}
+          handleError={this.props.handleError}
+          handleImageNotRecognized={this.props.handleError}
+          handleScan={this.props.handleScan}
           legacyMode={true}
           ref={(qrReader) => {this.qrReader = qrReader}}
           maxImageSize={750} />
-        <button onClick={() => this.handleSubmit()}>Open Image Dialog</button>
-        <p>{this.state.result}</p>
       </div>
     )
   }
 }
+
 
 export default CameraContainer;

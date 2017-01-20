@@ -1,3 +1,6 @@
+module.exports = function() {
+
+
 var db = require('../db');
 var Promise = require("bluebird");
 var exampleUsers = require('./exampleUsers.js');
@@ -7,6 +10,17 @@ var exampleBookings2 = require('./exampleBookings2.js');
 
 // begins chained functions to add users, properties, and bookings
 var propertyId = 0;
+// db.User.findAll()
+// .then(function(users) {
+//   console.log(users);
+//   if (users.length < 1) {
+//     addUsers();
+//   }
+// })
+// .catch(function(err) {
+//   console.err('Error checking DB to determine if self-population needed');
+// });
+
 addUsers();
 
 // add all users
@@ -23,6 +37,9 @@ function addUsers() {
   }, Promise.resolve()).then(
   function() {
     addProperties();
+  })
+  .catch(function(err) {
+    console.error('Error auto-adding users', err);
   });
 }
 
@@ -38,15 +55,22 @@ function addProperties() {
         return db.Property.create({
           UserId: userId,
           name: property.name,
+          price: property.price,
+          predictedPrice: property.predictedPrice,
+          personCapacity: property.personCapacity,
           location: property.location,
           checkInTime: property.checkInTime,
-          checkOutTime: property.checkOutTime
+          checkOutTime: property.checkOutTime,
+          photo: property.photo
         });
       });
     }, Promise.resolve())
   }).then(function() {
     addBookings();
   })
+  .catch(function(err) {
+    console.error('Error adding properties', err);
+  });
 }
 
 
@@ -66,13 +90,15 @@ function addBookings() {
         days: booking.days,
         pricePaid: booking.pricePaid,
         rating: booking.rating,
-        PropertyId: propertyId
         });
       });
     }, Promise.resolve())
   }).then(function() {
     addBookings2();
   })
+  .catch(function(err) {
+    console.error('Error adding bookings', err);
+  });
 }
 
 // find 2nd property to attach bookings to
@@ -95,5 +121,9 @@ function addBookings2() {
         });
       });
     }, Promise.resolve())
+  })
+  .catch(function(err) {
+    console.error('Error adding bookings2', err);
   });
 }
+};

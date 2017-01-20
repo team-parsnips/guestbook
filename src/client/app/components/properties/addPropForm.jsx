@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-
-import {addProperty} from '../../modules/actions';
+import Promise from 'bluebird'
+import {addProperty, addPredictPrice} from '../../modules/actions';
 
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 const mapStateToProps = function(store) {
   console.log(store);
   return {
+    user: store.userState,
     properties: store.propertyState
   };
 }
@@ -22,29 +23,41 @@ class AddPropForm extends React.Component {
   }
 
   addProp() {
-    var property, url;
-    property = {
+    // create the property and store it into the db and populate redux with the new property
+    let property = {
+      UserId: this.props.user.user.id,
       name: this.refs.name.getValue(),
       location: this.refs.location.getValue(),
+      price: this.refs.price.getValue(),
+      personCapacity: this.refs.personCapacity.getValue(),
+      photo: 'http://www.minimalisti.com/wp-content/uploads/2012/01/scandinavian-interior-design-living-room-decor-ideas.jpg',
       checkInTime: '3pm',
       checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
-    url = '/property/';
-    axios.post(url, {name: property.name,
-      location: property.location,
-      checkInTime: '3pm',
-      checkOutTime: '11am'      
+    axios.post('/property/', property)
+    .then((res) => {
+      console.log(res);
+      dispatch(addProperty(res.data));
+      return Promise.resolve(res.data);
     })
-    .then(res => {
-      dispatch(addProperty(property));  
+    // use the newly created property and request a predicted price, which is placed into redux
+    .then((property) => {
+      var airbnbAdd = property.location.split(' ').join('-');
+      axios.post('/predict', {
+        location: airbnbAdd,
+        personCapacity: property.personCapacity
+      })
+      .then((res) => {
+        dispatch(addPredictPrice(property, {predictedPrice: res.data[0].toFixed(2)}));
+      });
     })
     .catch(err => {
       console.error('Error saving to DB', err);
       alert('Add property was not successful, please try again');
     });
-    this.props.openHandler();
 
+    this.props.openHandler();
   }
 
   render() {
@@ -55,6 +68,7 @@ class AddPropForm extends React.Component {
         modal={false}
         open={this.props.open}
         onRequestClose={()=>{this.props.openHandler()}}>
+
           <TextField
           ref='name'
           hintText='Property Name'
@@ -65,6 +79,17 @@ class AddPropForm extends React.Component {
           hintText='Location'
           fullWidth={true}
           /><br />
+          <TextField
+          ref='personCapacity'
+          hintText='Person Capacity'
+          fullWidth={true}
+          /><br />
+          <TextField
+          ref='price'
+          hintText='Price'
+          fullWidth={true}
+          /><br />
+
           <RaisedButton
           label='Add'
           primary={true}

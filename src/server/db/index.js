@@ -1,8 +1,26 @@
 var Sequelize = require('sequelize');
+
+// To run in docker container/production mode - uncomment below
+// Ensure mysql is NOT running (mysql.server stop)
+// Run with 'docker-compose up' command in src directory
+
+var db = new Sequelize('database', 'root', 'parsnips', {
+  host: 'database',
+  port: '3306'
+});
+
+// To run locally/development mode - uncomment below
+// Ensure mysql is running (mysql.server start)
+// Create 'guestbook' database
+/*
 var db = new Sequelize('guestbook', 'root', '');
+*/
 
 var User = db.define('User', {
-  email: Sequelize.STRING,
+  email: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   password: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING
@@ -11,8 +29,12 @@ var User = db.define('User', {
 var Property = db.define('Property', {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
+  price: Sequelize.FLOAT,
+  predictedPrice: Sequelize.FLOAT,
+  personCapacity: Sequelize.INTEGER,
   checkInTime: Sequelize.STRING,
   checkOutTime: Sequelize.STRING,
+  photo: Sequelize.TEXT
 });
 
 var Booking = db.define('Booking', {
@@ -22,7 +44,8 @@ var Booking = db.define('Booking', {
   checkOutTime: Sequelize.DATE,
   days: Sequelize.INTEGER,
   pricePaid: Sequelize.FLOAT,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  PropertyId: Sequelize.INTEGER
 });
 
 Property.belongsTo(User);
@@ -31,8 +54,8 @@ Booking.belongsTo(Property);
 User.sync();
 Property.sync();
 Booking.sync();
+
 // creates these tables in MySQL if they don't already exist. Pass in {force: true}
-// to drop any existing user and message tables and make new ones.
 
 exports.User = User;
 exports.Property = Property;
