@@ -19,7 +19,7 @@ RUN npm install
 # Get all the code needed to run the app
 COPY . /dock/server
 
-
+RUN npm install
 
 # Expose the port the app runs in
 EXPOSE 4000
