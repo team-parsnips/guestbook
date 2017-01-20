@@ -19,7 +19,6 @@ services:
       - ./client:/dock/client
       - ./server:/dock/server
       - wwwroot:/dock/client/public
-      - ./server/node_modules:/dock/server/node_modules
   
   database:
     image: mysql
@@ -49,7 +48,6 @@ services:
     volumes:
       - ./client:/dock/client
       - wwwroot:/dock/client/public
-      - .client/node_modules:/dock/client/node_modules
     depends_on:
       - database
       - python
