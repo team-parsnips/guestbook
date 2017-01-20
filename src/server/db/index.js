@@ -44,7 +44,8 @@ var Booking = db.define('Booking', {
   checkOutTime: Sequelize.DATE,
   days: Sequelize.INTEGER,
   pricePaid: Sequelize.FLOAT,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  PropertyId: Sequelize.INTEGER
 });
 
 Property.belongsTo(User);
