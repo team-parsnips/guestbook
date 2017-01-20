@@ -33,7 +33,7 @@ const PropertyCard = (props) => {
       <IconButton onTouchTap={() => props.handleGenerateQR(props.property)}>
         <ActionAspectRatio color="white" />
       </IconButton>
-      <IconButton>
+      <IconButton onTouchTap={() => props.handleViewPrice(props.property)}>
         <EditorAttachMoney color="white" /> 
       </IconButton>
     </CardActions>
@@ -53,10 +53,3 @@ const PropertyCard = (props) => {
 }
 
 export default PropertyCard;
-    /*
-      <CardHeader
-        title={props.property.name + ' | ' + props.property.location} 
-        textStyle={textStyle}
-        style={{height: '65px'}}
-      />
-    */

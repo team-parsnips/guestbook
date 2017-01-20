@@ -19,15 +19,20 @@ const userState = (state = {}, action) => {
 const propertyState = (state = [], action) => {
   switch (action.type) {
     case 'ADD_PROPERTY':
-      return [...state, {
-        name: action.property.name,
-        location: action.property.location,
-        photo: action.property.photo
-      }];
+      return [...state, action.property];
     case 'DELETE_PROPERTY':
       return state.filter(property => (property.id !== action.property.id));
     case 'POPULATE_PROPERTIES':   
       return action.properties;
+    case 'ADD_PREDICT_PRICE':
+      let propertyWPredict = Object.assign({}, action.property, action.predictPrice);
+      return state.map((property) => {
+        if (property.id === action.property.id) {
+          return propertyWPredict;
+        } else {
+          return property;
+        }
+      })  
     default:
       return state;
   }

@@ -15,6 +15,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import MapsMap from 'material-ui/svg-icons/maps/map';
 import ContentClear from 'material-ui/svg-icons/content/clear'
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { Menu, MainButton, ChildButton } from 'react-mfb'
 // import 'react-mfb/mfb.css'
@@ -56,7 +57,10 @@ class PropertiesContainer extends React.Component {
     super(props);
     this.state = {
       addProp: false,
-      open: false
+      open: false,
+      openPrice: false,
+      price: 0,
+      predictedPrice: 0
     };
     this.openHandler = this.openHandler.bind(this);
   }
@@ -74,7 +78,7 @@ class PropertiesContainer extends React.Component {
     });
   }
 
-  // handles opening card with adding a property
+  // handles opening/closing add card
   openHandler() {
     this.setState({addProp: !this.state.addProp});
   }
@@ -97,9 +101,24 @@ class PropertiesContainer extends React.Component {
     })
   }
 
+  // retrieves price of the property selected and opens dialog box for price/predictedPrice
+  handleViewPrice(property) {
+    console.log(property);
+    this.setState({
+      openPrice: true,
+      price: property.price,
+      predictedPrice: property.predictedPrice
+    });
+  }
+
   // handles closing of qrcode dialog
   handleClose() {
     this.setState({open: false});
+  }
+
+  // handles closing of price dialog
+  handlePriceClose() {
+    this.setState({openPrice: false});
   }
 
   render() {
@@ -113,11 +132,21 @@ class PropertiesContainer extends React.Component {
     pos = 'br',
     method = 'hover';
 
+    // close action for qrcode dialog box
     const actions = [
       <IconButton onTouchTap={() => this.handleClose()}>
         <ContentClear />
       </IconButton>
     ];
+
+    // close action for price dialog box
+    const priceActions = [
+      <IconButton onTouchTap={() => this.handlePriceClose()}>
+        <ContentClear />
+      </IconButton>
+    ];
+
+    let predictedPrice = this.state.predictedPrice === null ? <CircularProgress /> : this.state.predictedPrice;
     return (
       <div>
         <Dialog
@@ -128,10 +157,19 @@ class PropertiesContainer extends React.Component {
           onRequestClose={() => this.handleClose()}>
           <img id='map'></img>
         </Dialog>
+        <Dialog
+          title="Price"
+          actions={priceActions}
+          open={this.state.openPrice}
+          onRequestClose={() => this.handleClose()}>
+          Current Price: {this.state.price} <br/>
+          Predicted Price: {predictedPrice}
+        </Dialog>
         <PropertyList 
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
-          handleGenerateQR={(property) => this.handleGenerateQR(property)}/>
+          handleGenerateQR={(property) => this.handleGenerateQR(property)}
+          handleViewPrice={(property) => this.handleViewPrice(property)}/>
           <FloatingActionButton 
             onTouchTap={()=> {this.openHandler()}}
             style={addStyle}>
