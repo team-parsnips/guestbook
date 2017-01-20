@@ -37,6 +37,9 @@ function addUsers() {
   }, Promise.resolve()).then(
   function() {
     addProperties();
+  })
+  .catch(function(err) {
+    console.error('Error auto-adding users', err);
   });
 }
 
@@ -65,6 +68,9 @@ function addProperties() {
   }).then(function() {
     addBookings();
   })
+  .catch(function(err) {
+    console.error('Error adding properties', err);
+  });
 }
 
 
@@ -91,6 +97,9 @@ function addBookings() {
   }).then(function() {
     addBookings2();
   })
+  .catch(function(err) {
+    console.error('Error adding bookings', err);
+  });
 }
 
 // find 2nd property to attach bookings to
@@ -113,6 +122,9 @@ function addBookings2() {
         });
       });
     }, Promise.resolve())
+  })
+  .catch(function(err) {
+    console.error('Error adding bookings2', err);
   });
 }
 };
