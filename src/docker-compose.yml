@@ -50,6 +50,7 @@ services:
       - wwwroot:/dock/client/public
     depends_on:
       - database
+      - python
   
   python:
     build:
