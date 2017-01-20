@@ -34,14 +34,22 @@ class AddPropForm extends React.Component {
     url = '/property/';
     axios.post(url, property)
     .then(res => {
-      dispatch(addProperty(property));  
+      dispatch(addProperty(property));
     })
     .catch(err => {
       console.error('Error saving to DB', err);
       alert('Add property was not successful, please try again');
     });
-    this.props.openHandler();
 
+    var airbnbAdd = this.refs.location.getValue().split(' ').join('-');
+    console.log(airbnbAdd);
+    axios.post('/predict', {
+      location: airbnbAdd
+    })
+    .then((res) => {
+      console.log('PREDICTED', res);
+    });
+    this.props.openHandler();
   }
 
   render() {

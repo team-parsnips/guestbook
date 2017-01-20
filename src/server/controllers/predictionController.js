@@ -2,12 +2,13 @@ var axios = require('axios');
 
 module.exports = {
   predictPrice: function(req, res, next) {
+    var airbnbAdd = req.body.location;
     axios({
       method: 'post',
       url: 'http://localhost:5000',
       timeout: 600000,
       data: {
-        location: 'irvine',
+        location: airbnbAdd,
         instant_book: 1,
         satisfaction_guest: 98,
         person_capacity: 2,

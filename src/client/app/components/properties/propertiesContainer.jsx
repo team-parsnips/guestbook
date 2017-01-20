@@ -56,7 +56,10 @@ class PropertiesContainer extends React.Component {
     super(props);
     this.state = {
       addProp: false,
-      open: false
+      open: false,
+      openPrice: false,
+      price: 0,
+      predictedPrice: 0
     };
     this.openHandler = this.openHandler.bind(this);
   }
@@ -97,9 +100,24 @@ class PropertiesContainer extends React.Component {
     })
   }
 
+  // retrieves price of the property selected and opens dialog box for price/predictedPrice
+  handleViewPrice(property) {
+    console.log(property);
+    this.setState({
+      openPrice: true,
+      price: property.price,
+      predictedPrice: property.predictedPrice
+    });
+  }
+
   // handles closing of qrcode dialog
   handleClose() {
     this.setState({open: false});
+  }
+
+  // handles closing of price dialog
+  handlePriceClose() {
+    this.setState({openPrice: false});
   }
 
   render() {
@@ -118,6 +136,12 @@ class PropertiesContainer extends React.Component {
         <ContentClear />
       </IconButton>
     ];
+
+    const priceActions = [
+      <IconButton onTouchTap={() => this.handlePriceClose()}>
+        <ContentClear />
+      </IconButton>
+    ];
     return (
       <div>
         <Dialog
@@ -128,10 +152,19 @@ class PropertiesContainer extends React.Component {
           onRequestClose={() => this.handleClose()}>
           <img id='map'></img>
         </Dialog>
+        <Dialog
+          title="Price"
+          actions={priceActions}
+          open={this.state.openPrice}
+          onRequestClose={() => this.handleClose()}>
+          Current Price: {this.state.price} <br/>
+          Predicted Price: {this.state.predictedPrice}
+        </Dialog>
         <PropertyList 
           properties={this.props.properties}
           deleteProperty={(property) => this.deleteProperty(property)}
-          handleGenerateQR={(property) => this.handleGenerateQR(property)}/>
+          handleGenerateQR={(property) => this.handleGenerateQR(property)}
+          handleViewPrice={(property) => this.handleViewPrice(property)}/>
           <FloatingActionButton 
             onTouchTap={()=> {this.openHandler()}}
             style={addStyle}>
