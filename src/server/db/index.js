@@ -31,6 +31,7 @@ var Property = db.define('Property', {
   location: Sequelize.STRING,
   price: Sequelize.FLOAT,
   predictedPrice: Sequelize.FLOAT,
+  personCapacity: Sequelize.INTEGER,
   checkInTime: Sequelize.STRING,
   checkOutTime: Sequelize.STRING,
   photo: Sequelize.TEXT

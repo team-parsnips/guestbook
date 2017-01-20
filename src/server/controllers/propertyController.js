@@ -14,10 +14,11 @@ module.exports = {
       name: req.body.name,
       location: req.body.location,
       price: req.body.price,
+      personCapacity: req.body.personCapacity,
       checkInTime: req.body.checkInTime,
       checkOutTime: req.body.checkOutTime
     }).then(function(property) {
-      res.sendStatus(201);
+      res.send(property);
     });
   },
 

@@ -57,7 +57,7 @@ class Guest extends React.Component {
         propertyName: res.data.name,
         propertyPic: res.data.photo,
       });
-      socket.emit('guest checked in', {propertyName: res.data.name});
+      socket.emit('check in', {propertyName: res.data.name});
     });
   }
 

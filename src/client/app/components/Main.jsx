@@ -65,13 +65,17 @@ class Main extends React.Component {
     super(props);
     this.state = {
       open: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      propertyName: ''
     };
   }
 
   componentDidMount() {
     socket.emit('hostLogin', {hostId: 1});
-    socket.on('guest checked in', () => this.handleGuestCheckIn());
+    socket.on('guest checked in', (data) => {
+      this.handleGuestCheckIn();
+      this.setState({propertyName: data.propertyName});
+    });
   }
 
   handleRequestClose() {
@@ -123,9 +127,9 @@ class Main extends React.Component {
           </div>
           <Snackbar
             open={this.state.open}
-            message={"A guest has checked into "}
+            message={"A guest has checked into " + this.state.propertyName}
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+            onRequestClose={() => this.handleRequestClose()}
           />
         </div>
       </MuiThemeProvider>

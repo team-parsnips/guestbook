@@ -38,6 +38,9 @@ function addProperties() {
         return db.Property.create({
           UserId: userId,
           name: property.name,
+          price: property.price,
+          predictedPrice: property.predictedPrice,
+          personCapacity: property.personCapacity,
           location: property.location,
           checkInTime: property.checkInTime,
           checkOutTime: property.checkOutTime,
