@@ -29,6 +29,7 @@ class AddPropForm extends React.Component {
       name: this.refs.name.getValue(),
       location: this.refs.location.getValue(),
       price: this.refs.price.getValue(),
+      personCapacity: this.refs.personCapacity.getValue(),
       checkInTime: '3pm',
       checkOutTime: '11am'      
     };
@@ -41,9 +42,10 @@ class AddPropForm extends React.Component {
     })
     // use the newly created property and request a predicted price, which is placed into redux
     .then((property) => {
-      var airbnbAdd = this.refs.location.getValue().split(' ').join('-');
+      var airbnbAdd = property.location.split(' ').join('-');
       axios.post('/predict', {
-        location: airbnbAdd
+        location: airbnbAdd,
+        personCapacity: property.personCapacity
       })
       .then((res) => {
         dispatch(addPredictPrice(property, {predictedPrice: res.data[0].toFixed(2)}));
@@ -65,6 +67,7 @@ class AddPropForm extends React.Component {
         modal={false}
         open={this.props.open}
         onRequestClose={()=>{this.props.openHandler()}}>
+
           <TextField
           ref='name'
           hintText='Property Name'
@@ -76,10 +79,16 @@ class AddPropForm extends React.Component {
           fullWidth={true}
           /><br />
           <TextField
+          ref='personCapacity'
+          hintText='Person Capacity'
+          fullWidth={true}
+          /><br />
+          <TextField
           ref='price'
           hintText='Price'
           fullWidth={true}
           /><br />
+
           <RaisedButton
           label='Add'
           primary={true}
@@ -92,10 +101,3 @@ class AddPropForm extends React.Component {
 };
 
 export default connect(mapStateToProps)(AddPropForm);
-
-
-    // {name: property.name,
-    //   location: property.location,
-    //   checkInTime: '3pm',
-    //   checkOutTime: '11am'      
-    // }

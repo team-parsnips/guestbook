@@ -53,10 +53,3 @@ const PropertyCard = (props) => {
 }
 
 export default PropertyCard;
-    /*
-      <CardHeader
-        title={props.property.name + ' | ' + props.property.location} 
-        textStyle={textStyle}
-        style={{height: '65px'}}
-      />
-    */
