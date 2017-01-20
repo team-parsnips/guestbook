@@ -30,6 +30,7 @@ class AddPropForm extends React.Component {
       location: this.refs.location.getValue(),
       price: this.refs.price.getValue(),
       personCapacity: this.refs.personCapacity.getValue(),
+      photo: 'http://www.minimalisti.com/wp-content/uploads/2012/01/scandinavian-interior-design-living-room-decor-ideas.jpg',
       checkInTime: '3pm',
       checkOutTime: '11am'      
     };
