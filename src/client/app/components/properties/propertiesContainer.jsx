@@ -15,6 +15,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import MapsMap from 'material-ui/svg-icons/maps/map';
 import ContentClear from 'material-ui/svg-icons/content/clear'
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { Menu, MainButton, ChildButton } from 'react-mfb'
 // import 'react-mfb/mfb.css'
@@ -131,17 +132,21 @@ class PropertiesContainer extends React.Component {
     pos = 'br',
     method = 'hover';
 
+    // close action for qrcode dialog box
     const actions = [
       <IconButton onTouchTap={() => this.handleClose()}>
         <ContentClear />
       </IconButton>
     ];
 
+    // close action for price dialog box
     const priceActions = [
       <IconButton onTouchTap={() => this.handlePriceClose()}>
         <ContentClear />
       </IconButton>
     ];
+
+    let predictedPrice = this.state.predictedPrice === null ? <CircularProgress /> : this.state.predictedPrice;
     return (
       <div>
         <Dialog
@@ -158,7 +163,7 @@ class PropertiesContainer extends React.Component {
           open={this.state.openPrice}
           onRequestClose={() => this.handleClose()}>
           Current Price: {this.state.price} <br/>
-          Predicted Price: {this.state.predictedPrice}
+          Predicted Price: {predictedPrice}
         </Dialog>
         <PropertyList 
           properties={this.props.properties}
