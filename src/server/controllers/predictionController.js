@@ -8,7 +8,7 @@ module.exports = {
     console.log('personCapacity', personCap);
     axios({
       method: 'post',
-      url: 'http://localhost:5000',
+      url: 'http://172.18.0.2:5000',
       timeout: 600000,
       data: {
         location: airbnbAdd,
@@ -26,6 +26,10 @@ module.exports = {
     .then(function(predicted) {
       console.log(predicted.data);
       res.send(predicted.data);
+    })
+    .catch(function(err) {
+      console.error('Error submitting POST request to prediction-service', err);
+      res.send(err);
     });
   }
 };
