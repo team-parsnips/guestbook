@@ -9,7 +9,7 @@ services:
     image: guestbook-server
     container_name: guestbook-server-container
     ports:
-      - "4000:4000" #specify ports forewarding
+      - "80:4000" #specify ports forewarding
     links:
       - database:database
     depends_on:

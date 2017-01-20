@@ -2,15 +2,19 @@ var axios = require('axios');
 
 module.exports = {
   predictPrice: function(req, res, next) {
+    var airbnbAdd = req.body.location;
+    var personCap = parseInt(req.body.personCapacity);
+    console.log('airbnbAdd', airbnbAdd);
+    console.log('personCapacity', personCap);
     axios({
       method: 'post',
-      url: 'http://172.20.0.2:5000',
+      url: 'http://172.18.0.2:5000',
       timeout: 600000,
       data: {
-        location: 'portland',
+        location: airbnbAdd,
         instant_book: 1,
         satisfaction_guest: 98,
-        person_capacity: 2,
+        person_capacity: personCap,
         rating_communication: 10,
         rev_count: 214,
         cancel_policy: 4,

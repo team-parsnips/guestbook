@@ -43,7 +43,6 @@ io.on('connection', function (socket) {
 
   socket.on('hostLogin', function(data) {
     console.log('got host login')
-    // join hosts room
     socket.join('hosts');
   });
 

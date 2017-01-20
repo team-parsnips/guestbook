@@ -22,7 +22,8 @@ class PropertyList extends React.Component {
             <PropertyCard 
               property={property} 
               handleGenerateQR={this.props.handleGenerateQR}
-              deleteProperty={this.props.deleteProperty}/>
+              deleteProperty={this.props.deleteProperty}
+              handleViewPrice={this.props.handleViewPrice}/>
           </div>
         ))
       }
