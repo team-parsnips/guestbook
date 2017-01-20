@@ -77,7 +77,7 @@ class PropertiesContainer extends React.Component {
     });
   }
 
-  // handles opening card with adding a property
+  // handles opening/closing add card
   openHandler() {
     this.setState({addProp: !this.state.addProp});
   }

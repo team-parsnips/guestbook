@@ -17,7 +17,7 @@ module.exports = {
       checkInTime: req.body.checkInTime,
       checkOutTime: req.body.checkOutTime
     }).then(function(property) {
-      res.sendStatus(201);
+      res.send(property);
     });
   },
 

@@ -19,6 +19,14 @@ export const addProperty = (property) => {
   }
 }
 
+export const addPredictPrice = (property, predictPrice) => {
+  return {
+    type: 'ADD_PREDICT_PRICE',
+    property,
+    predictPrice
+  }
+}
+
 export const deleteProperty = (property) => {
   return {
     type: 'DELETE_PROPERTY',

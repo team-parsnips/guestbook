@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-
-import {addProperty} from '../../modules/actions';
+import Promise from 'bluebird'
+import {addProperty, addPredictPrice} from '../../modules/actions';
 
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 const mapStateToProps = function(store) {
   console.log(store);
   return {
+    user: store.userState,
     properties: store.propertyState
   };
 }
@@ -22,8 +23,9 @@ class AddPropForm extends React.Component {
   }
 
   addProp() {
-    var property, url;
-    property = {
+    // create the property and store it into the db and populate redux with the new property
+    let property = {
+      UserId: this.props.user.user.id,
       name: this.refs.name.getValue(),
       location: this.refs.location.getValue(),
       price: this.refs.price.getValue(),
@@ -31,24 +33,27 @@ class AddPropForm extends React.Component {
       checkOutTime: '11am'      
     };
     let {dispatch} = this.props;
-    url = '/property/';
-    axios.post(url, property)
-    .then(res => {
-      dispatch(addProperty(property));
+    axios.post('/property/', property)
+    .then((res) => {
+      console.log(res);
+      dispatch(addProperty(res.data));
+      return Promise.resolve(res.data);
+    })
+    // use the newly created property and request a predicted price, which is placed into redux
+    .then((property) => {
+      var airbnbAdd = this.refs.location.getValue().split(' ').join('-');
+      axios.post('/predict', {
+        location: airbnbAdd
+      })
+      .then((res) => {
+        dispatch(addPredictPrice(property, {predictedPrice: res.data[0].toFixed(2)}));
+      });
     })
     .catch(err => {
       console.error('Error saving to DB', err);
       alert('Add property was not successful, please try again');
     });
 
-    var airbnbAdd = this.refs.location.getValue().split(' ').join('-');
-    console.log(airbnbAdd);
-    axios.post('/predict', {
-      location: airbnbAdd
-    })
-    .then((res) => {
-      console.log('PREDICTED', res);
-    });
     this.props.openHandler();
   }
 
