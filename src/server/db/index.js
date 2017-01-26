@@ -27,7 +27,10 @@ var User = db.define('User', {
 });
 
 var Property = db.define('Property', {
-  name: Sequelize.STRING,
+  name: {
+	type: Sequelize.STRING,
+	unique: true
+	},
   location: Sequelize.STRING,
   price: Sequelize.FLOAT,
   predictedPrice: Sequelize.FLOAT,
