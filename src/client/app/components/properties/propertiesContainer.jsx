@@ -85,7 +85,11 @@ class PropertiesContainer extends React.Component {
 
   // removes property from redux/db
   deleteProperty(property) {
-    this.props.dispatch(deleteProperty(property));
+    let {dispatch} = this.props;
+    axios.delete('/property/' + property.id)
+    .then(response => {
+      dispatch(deleteProperty(property));
+    });
   }
 
   // gets QR Code handling check-in of that property
