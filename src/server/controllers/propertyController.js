@@ -42,6 +42,17 @@ module.exports = {
     .catch(function(err) {
       console.error('Error loading all properties', err);
     });
+  },
+
+  removeProperty: function(req, res, next) {
+    db.Property.findOne({where: {id: req.params.id}})
+    .then(function(property) {
+      return property.destroy();
+    })
+    .then(function(destroyed) {
+      console.log('destroyed', destroyed);
+      res.send(destroyed);
+    })
   }
 }
 

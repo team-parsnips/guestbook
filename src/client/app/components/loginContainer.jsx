@@ -65,7 +65,7 @@ class LoginContainer extends React.Component {
 
   // signin for fb users
   handleFbSignIn(email, id, firstName, lastName) {
-    axios.post('/login/fb', {
+/*    axios.post('/login/fb', {
       email: email,
       password: id,
       firstName: firstName,
@@ -75,7 +75,9 @@ class LoginContainer extends React.Component {
       // successful signin with receipt of user object
       this.props.dispatch(signIn(res.data));
       browserHistory.push('/properties');
-    });
+    });*/
+    this.props.dispatch(signIn(res.data));
+    browserHistory.push('/properties');
   }
 
   render() {

@@ -37,7 +37,6 @@ class FbLogin extends React.Component {
 
   testAPI() {
     FB.api('/me', {fields: 'email,first_name,last_name'}, (res) => {
-      console.log(res);
       this.props.handleSignIn(res.email, res.id, res.first_name, res.last_name);
     });
   }
